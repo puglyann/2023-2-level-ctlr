@@ -127,3 +127,4 @@ Lab_6
 -  :py:func:`core_utils.article.io.to_conllu` - use to save morphological
    and syntactic information from the
    :py:class:`core_utils.article.article.Article` abstraction into the ``conllu`` file.
+-  :py:func:`core_utils.article.io.to_json` - use to save patterns of articles in json;

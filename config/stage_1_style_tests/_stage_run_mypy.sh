@@ -11,7 +11,7 @@ configure_script
 FAILED=0
 LABS=$(get_labs)
 
-mypy config seminars
+mypy config seminars admin_utils
 
 check_if_failed
 

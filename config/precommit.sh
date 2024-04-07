@@ -5,11 +5,16 @@ if [[ "$1" == "smoke" ]]; then
   DIRS_TO_CHECK=(
     "config"
     "seminars"
+    "admin_utils"
+    "core_utils"
+    "lab_5_scrapper"
+    "lab_6_pipeline"
   )
 else
   DIRS_TO_CHECK=(
     "config"
     "seminars"
+    "admin_utils"
     "core_utils"
     "lab_5_scrapper"
     "lab_6_pipeline"

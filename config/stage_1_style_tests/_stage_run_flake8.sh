@@ -8,7 +8,7 @@ echo 'Running flake8 check...'
 
 configure_script
 
-python -m flake8 config seminars
+python -m flake8 config seminars admin_utils
 
 if [ -d "core_utils" ]; then
   echo "core_utils exist"

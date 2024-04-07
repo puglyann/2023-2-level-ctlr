@@ -9,8 +9,8 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+from admin_utils.test_params import TEST_CRAWLER_CONFIG_PATH, TEST_PATH
 
-from config.test_params import TEST_CRAWLER_CONFIG_PATH, TEST_PATH
 from core_utils.constants import CRAWLER_CONFIG_PATH, TIMEOUT_LOWER_LIMIT, TIMEOUT_UPPER_LIMIT
 from lab_5_scrapper import scrapper
 from lab_5_scrapper.scrapper import (IncorrectEncodingError, IncorrectHeadersError,

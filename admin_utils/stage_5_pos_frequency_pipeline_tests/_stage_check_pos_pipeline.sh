@@ -9,7 +9,7 @@ configure_script
 TARGET_SCORE=$(get_score lab_6_pipeline)
 
 if [[ ${TARGET_SCORE} != 0 ]]; then
-  python config/unpack_archived_dataset.py lab_6_pipeline
+  python admin_utils/unpack_archived_dataset.py lab_6_pipeline
 
   if [[ ${TARGET_SCORE} == 10 ]]; then
     python lab_6_pipeline/pos_frequency_pipeline.py

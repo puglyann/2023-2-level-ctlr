@@ -3,7 +3,8 @@ Utils for core_utils tests.
 """
 import shutil
 
-from config.test_params import CORE_UTILS_TEST_FILES_FOLDER, TEST_PATH
+from admin_utils.test_params import CORE_UTILS_TEST_FILES_FOLDER, TEST_PATH
+
 from core_utils.constants import ASSETS_PATH
 
 

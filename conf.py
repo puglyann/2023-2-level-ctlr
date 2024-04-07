@@ -32,6 +32,7 @@ intersphinx_mapping = {
 nitpick_ignore = [
     ('py:class', 'spacy.tokens.token.Token'),
     ('py:class', 'spacy.tokens.Token'),
+    ('py:class', 'stanza.models.common.doc.Document'),
 ]
 
 exclude_patterns = [

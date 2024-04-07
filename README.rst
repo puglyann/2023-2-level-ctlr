@@ -63,11 +63,11 @@ Project Timeline
 Lectures history
 ----------------
 
-+--------+---------------------------------------+---------------------+
-| Date   | Lecture topic                         | Important links     |
-+========+=======================================+=====================+
-| TBD    | TBD                                   | TBD                 |
-+--------+---------------------------------------+---------------------+
++------------+-------------------------------------------+---------------------------+
+| Date       | Lecture topic                             | Important links           |
++============+===========================================+===========================+
+| 01.04.2024 | Lecture: Introduction to technical track. | Lab no. 5 description     |
++------------+-------------------------------------------+---------------------------+
 
 You can find a more complete summary from lectures in :ref:`ctlr-lectures-label`.
 
@@ -166,8 +166,10 @@ Resources
 3. `Documentation website <https://fipl-hse.github.io/>`__
 4. `Python programming course from previous semester
    <https://github.com/fipl-hse/2023-2-level-labs>`__
-5. `Scrapping tutorials (russian) <https://youtu.be/7hn1_t2ZtJQ>`__
-6. :ref:`starting-guide-en-label`
-7. :ref:`ctlr-tests-label`
-8. :ref:`run-in-terminal-label`
-9. :ref:`ctlr-faq-label`
+5. `Scrapping tutorials (Russian) <https://youtu.be/7hn1_t2ZtJQ>`__
+6. `Scrapping tutorials (English)
+   <https://www.youtube.com/playlist?list=PL1jK3K11NINiOn4DdIDVdyQpcU3kaNxl0>`__
+7. :ref:`starting-guide-en-label`
+8. :ref:`ctlr-tests-label`
+9. :ref:`run-in-terminal-label`
+10. :ref:`ctlr-faq-label`

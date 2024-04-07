@@ -120,6 +120,7 @@ def main() -> None:
             lab_path / 'scrapper.py',
             lab_path / 'scrapper_dynamic.py',
             lab_path / 'pipeline.py',
+            lab_path / 'stanza_pipeline.py',
             lab_path / 'pos_frequency_pipeline.py',
         )
         for path in paths:

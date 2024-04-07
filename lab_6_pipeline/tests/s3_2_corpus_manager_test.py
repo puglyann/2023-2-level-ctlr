@@ -5,8 +5,8 @@ import shutil
 import unittest
 
 import pytest
+from admin_utils.test_params import PIPE_TEST_FILES_FOLDER, TEST_PATH
 
-from config.test_params import PIPE_TEST_FILES_FOLDER, TEST_PATH
 from core_utils.article.article import Article
 from lab_6_pipeline.pipeline import CorpusManager
 from lab_6_pipeline.tests.utils import pipeline_test_files_setup

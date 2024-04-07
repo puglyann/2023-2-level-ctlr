@@ -40,6 +40,10 @@ def generate_all_stubs(project_config: ProjectConfig) -> None:
                 PROJECT_ROOT / lab_name / 'main.py',
                 PROJECT_ROOT / lab_name / 'start.py',
                 PROJECT_ROOT / lab_name / 'service.py',
+                PROJECT_ROOT / lab_name / 'scrapper.py',
+                PROJECT_ROOT / lab_name / 'pipeline.py',
+                PROJECT_ROOT / lab_name / 'pos_frequency_pipeline.py',
+                PROJECT_ROOT / lab_name / 'stanza_pipeline.py',
         )
         for module_path in module_paths:
             if not module_path.exists():

@@ -6,10 +6,10 @@ import shutil
 import unittest
 
 import pytest
+from admin_utils.test_params import PIPE_TEST_FILES_FOLDER, TEST_PATH
 
 import core_utils.article.article as article_instance
 import lab_6_pipeline.pos_frequency_pipeline as pos_freq_pipe
-from config.test_params import PIPE_TEST_FILES_FOLDER, TEST_PATH
 from core_utils.article.article import ArtifactType
 from lab_6_pipeline.pipeline import CorpusManager
 from lab_6_pipeline.pos_frequency_pipeline import EmptyFileError, POSFrequencyPipeline

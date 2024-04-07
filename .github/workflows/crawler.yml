@@ -187,7 +187,7 @@ jobs:
         uses: fipl-hse/setup-env-action@v0.10
       - name: Crawl a raw dataset from web
         run: |
-          bash config/stage_2_crawler_tests/_stage_collect_articles.sh "$PR_NAME" "$PR_AUTHOR"
+          bash admin_utils/stage_2_crawler_tests/_stage_collect_articles.sh "$PR_NAME" "$PR_AUTHOR"
           bash config/_stage_run_pytest.sh "$PR_NAME" "$PR_AUTHOR" -l lab_5_scrapper -m stage_2_4_dataset_volume_check
       - name: Archive raw dataset
         uses: actions/upload-artifact@v3
@@ -219,7 +219,7 @@ jobs:
         run: |
           source venv/bin/activate
           export PYTHONPATH=$(pwd):$PYTHONPATH
-          python config/unpack_archived_dataset.py lab_5_scrapper
+          python admin_utils/unpack_archived_dataset.py lab_5_scrapper
           bash config/_stage_run_pytest.sh "$PR_NAME" "$PR_AUTHOR" -l lab_5_scrapper -m stage_2_5_dataset_validation
 
   milestone-1-crawler-is-working:
@@ -292,7 +292,7 @@ jobs:
         run: |
           source venv/bin/activate  
           export PYTHONPATH=$(pwd):$PYTHONPATH
-          python config/unpack_archived_dataset.py lab_6_pipeline
+          python admin_utils/unpack_archived_dataset.py lab_6_pipeline
           bash config/_stage_run_pytest.sh "$PR_NAME" "$PR_AUTHOR" -l lab_6_pipeline -m stage_3_2_corpus_manager_checks
 
   checking-conllu-token-works-correctly:
@@ -341,7 +341,7 @@ jobs:
         run: |
           source venv/bin/activate
           export PYTHONPATH=$(pwd):$PYTHONPATH
-          python config/unpack_archived_dataset.py lab_6_pipeline
+          python admin_utils/unpack_archived_dataset.py lab_6_pipeline
           bash config/_stage_run_pytest.sh "$PR_NAME" "$PR_AUTHOR" -l lab_6_pipeline -m stage_3_4_admin_data_processing
           bash config/_stage_run_pytest.sh "$PR_NAME" "$PR_AUTHOR" -l lab_6_pipeline -m stage_3_6_advanced_morphological_processing
 
@@ -366,7 +366,7 @@ jobs:
           name: raw-dataset
       - name: Run validation of `_processed.txt` files
         run: |
-          bash config/stage_3_pipeline_tests/_stage_check_on_student_dataset.sh "$PR_AUTHOR"
+          bash admin_utils/stage_3_pipeline_tests/_stage_check_on_student_dataset.sh "$PR_AUTHOR"
       - name: Archive processed dataset
         continue-on-error: true
         uses: actions/upload-artifact@v3
@@ -399,11 +399,11 @@ jobs:
         run: |
           source venv/bin/activate  
           export PYTHONPATH=$(pwd):$PYTHONPATH
-          python config/unpack_archived_dataset.py lab_6_pipeline
+          python admin_utils/unpack_archived_dataset.py lab_6_pipeline
           bash config/_stage_run_pytest.sh "$PR_NAME" "$PR_AUTHOR" -l lab_6_pipeline -m stage_3_5_student_dataset_validation
       - name: Run validation of `.conllu` files
         run: |
-          bash config/stage_3_pipeline_tests/_stage_check_student_conllu_validation.sh
+          bash admin_utils/stage_3_pipeline_tests/_stage_check_student_conllu_validation.sh
 
   running-pos-pipeline-tests:
     name: POSFrequencyPipeline tests
@@ -430,7 +430,7 @@ jobs:
           name: processed-dataset
       - name: Congratulations
         run: |
-          bash config/stage_5_pos_frequency_pipeline_tests/_stage_check_pos_pipeline.sh "$PR_AUTHOR"
+          bash admin_utils/stage_5_pos_frequency_pipeline_tests/_stage_check_pos_pipeline.sh "$PR_AUTHOR"
           bash config/_stage_run_pytest.sh "$PR_NAME" "$PR_AUTHOR" -l lab_6_pipeline -m stage_4_pos_frequency_pipeline_checks
       - name: Archive processed dataset
         continue-on-error: true

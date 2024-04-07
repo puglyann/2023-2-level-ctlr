@@ -16,6 +16,7 @@ def get_paths() -> list:
     """
     paths_to_exclude = {
         'venv',
+        '.venv',
         '.git',
         '.idea',
         '.coverage',
@@ -23,6 +24,8 @@ def get_paths() -> list:
         '.pytest_cache',
         '__pycache__',
         'build',
+        'russian-syntagrus-ud-2.0-170801.udpipe',
+        'tmp'
         '_build',
         'intersphinx',
         'test_tmp',

@@ -7,8 +7,8 @@ import unittest
 from string import punctuation
 
 import pytest
+from admin_utils.test_params import PIPE_TEST_FILES_FOLDER, TEST_PATH
 
-from config.test_params import PIPE_TEST_FILES_FOLDER, TEST_PATH
 from core_utils.article import article
 from core_utils.article.ud import extract_sentences_from_raw_conllu
 from lab_6_pipeline.pipeline import CorpusManager, MorphologicalAnalysisPipeline

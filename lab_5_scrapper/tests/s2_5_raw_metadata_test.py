@@ -7,8 +7,8 @@ import shutil
 import unittest
 
 import pytest
+from admin_utils.test_params import TEST_PATH
 
-from config.test_params import TEST_PATH
 from core_utils.constants import CRAWLER_CONFIG_PATH
 from lab_5_scrapper.scrapper import Config, make_request
 from lab_5_scrapper.tests.utils import scrapper_setup

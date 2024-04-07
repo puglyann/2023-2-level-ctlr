@@ -8,8 +8,8 @@ import unittest
 from pathlib import Path
 
 import pytest
+from admin_utils.test_params import CORE_UTILS_TEST_FILES_FOLDER, PROJECT_ROOT, TEST_PATH
 
-from config.test_params import CORE_UTILS_TEST_FILES_FOLDER, PROJECT_ROOT, TEST_PATH
 from core_utils.article import article
 from core_utils.article.article import (Article, ArtifactType, date_from_meta,
                                         get_article_id_from_filepath)

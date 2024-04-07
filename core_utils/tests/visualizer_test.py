@@ -11,7 +11,8 @@ try:
 except ImportError:
     print('No libraries installed. Failed to import.')
 
-from config.test_params import CORE_UTILS_TEST_FILES_FOLDER, TEST_PATH
+from admin_utils.test_params import CORE_UTILS_TEST_FILES_FOLDER, TEST_PATH
+
 from core_utils.article.article import Article
 from core_utils.article.io import from_meta
 from core_utils.visualizer import visualize

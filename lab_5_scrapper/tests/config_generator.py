@@ -6,7 +6,7 @@ import json
 import shutil
 from pathlib import Path
 
-from config.test_params import TEST_CRAWLER_CONFIG_PATH, TEST_PATH
+from admin_utils.test_params import TEST_CRAWLER_CONFIG_PATH, TEST_PATH
 
 
 def generate_config(seed_urls: list,

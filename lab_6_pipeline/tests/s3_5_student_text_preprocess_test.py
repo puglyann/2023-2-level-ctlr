@@ -6,14 +6,14 @@ import shutil
 import unittest
 
 import pytest
+from admin_utils.test_params import TEST_PATH
 
-from config.test_params import TEST_PATH
 from core_utils.article.ud import extract_sentences_from_raw_conllu
 from lab_6_pipeline.pipeline import CorpusManager
 from lab_6_pipeline.tests.utils import pipeline_setup
 
 UD_TAGS = ['ADJ', 'ADP', 'ADV', 'AUX', 'CCONJ', 'DET', 'INTJ', 'NOUN', 'NUM',
-           'PART', 'PRON', 'PROPN', 'PUNCT', 'SCONJ', 'SYM', 'VERB', 'X']
+           'PART', 'PRON', 'PROPN', 'PUNCT', 'ROOT', 'SCONJ', 'SYM', 'VERB', 'X']
 PUNCTUATION_MARKS = [',', '.', '-', ';', ':', '!', '?', '<']
 
 

@@ -4,7 +4,7 @@ get_score() {
 }
 
 get_labs() {
-  jq -r '.labs[].name' config/project_config.json
+  jq -r '.labs[].name' project_config.json
 
 }
 

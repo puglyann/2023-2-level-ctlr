@@ -5,8 +5,9 @@ import argparse
 import shutil
 import sys
 
+from admin_utils.test_params import PROJECT_ROOT
+
 from config.collect_coverage.run_coverage import get_target_score
-from config.test_params import PROJECT_ROOT
 from core_utils.constants import ASSETS_PATH
 
 

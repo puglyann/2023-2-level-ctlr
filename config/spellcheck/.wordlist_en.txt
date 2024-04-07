@@ -210,6 +210,7 @@ configuration
 configuring
 conform
 conll
+conlladapter
 conllu
 conllusentence
 conllusentenceminimaltest
@@ -289,6 +290,7 @@ definition
 delete
 demands
 demidovskij
+dep
 dependencies
 deprel
 deps
@@ -357,6 +359,7 @@ encapsulates
 encoding
 encounter
 end
+english
 enough
 ensure
 entities
@@ -593,6 +596,7 @@ intj
 into
 introduce
 introduced
+introduction
 invalid
 io
 irina
@@ -832,6 +836,7 @@ path
 pathlib
 paths
 pattern
+patternsearcher
 per
 perform
 performance
@@ -871,6 +876,7 @@ prepare
 prepareenvironmenttest
 preprocess
 preprocessed
+preprocesses
 preprocessing
 prerequisites
 present
@@ -1151,6 +1157,7 @@ support
 sure
 surname
 suspicious
+syntaxanalysispipeline
 sys
 system
 tab

@@ -3,7 +3,8 @@ Utils for lab_6_pipeline tests.
 """
 import shutil
 
-from config.test_params import PIPE_TEST_FILES_FOLDER, TEST_PATH
+from admin_utils.test_params import PIPE_TEST_FILES_FOLDER, TEST_PATH
+
 from core_utils.article import article
 from core_utils.constants import ASSETS_PATH
 from core_utils.tests.utils import copy_student_data

@@ -3,7 +3,8 @@ Utils for lab_5_scrapper tests.
 """
 import random
 
-from config.test_params import TEST_PATH
+from admin_utils.test_params import TEST_PATH
+
 from core_utils.article import article
 from core_utils.article.io import to_meta, to_raw
 from core_utils.constants import ASSETS_PATH, CRAWLER_CONFIG_PATH

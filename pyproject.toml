@@ -128,6 +128,7 @@ module = [
     'pymystem3',
     'spacy_udpipe',
     'spacy_conll',
+    'stanza.*',
     'torch.*',
     'transformers',
 ]
@@ -176,6 +177,15 @@ disable_error_code = [
 
 [[tool.mypy.overrides]]
 module = [
+    'core_utils.article.article',
+    'core_utils.stanza_utils'
+]
+disable_error_code = [
+    'no-any-unimported'
+]
+
+[[tool.mypy.overrides]]
+module = [
     'config.get_datasets_analytics',
     'config.get_inference_analytics',
     'config.get_references',
@@ -200,6 +210,10 @@ module = [
     '*.scrapper_stub',
     '*.pipeline',
     '*.pipeline_stub',
+    '*.pos_frequency_pipeline',
+    '*.pos_frequency_pipeline_stub',
+    '*.stanza_pipeline',
+    '*.stanza_pipeline_stub',
 ]
 disable_error_code = [
     'empty-body',
@@ -207,12 +221,17 @@ disable_error_code = [
 ]
 
 [[tool.mypy.overrides]]
-module = ['lab_5_scrapper.*', 'lab_6_pipeline.*', 'config.*', ]
+module = [
+    'lab_5_scrapper.*',
+    'lab_6_pipeline.*',
+    'config.*',
+]
 disable_error_code  = [
     'var-annotated',
     'union-attr',
     'operator',
-    'import'
+    'import',
+    'no-any-unimported'
 ]
 
 [[tool.mypy.overrides]]

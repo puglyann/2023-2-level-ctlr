@@ -5,7 +5,7 @@ configure_script
 
 check_skip "$1" "$2" "lab_5_scrapper"
 
-python config/config_param_changer.py --config_path="lab_5_scrapper/scrapper_config.json"
+python admin_utils/config_param_changer.py --config_path="lab_5_scrapper/scrapper_config.json"
 
 echo "Changed config params"
 
