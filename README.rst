@@ -63,11 +63,33 @@ Project Timeline
 Lectures history
 ----------------
 
-+------------+-------------------------------------------+---------------------------+
-| Date       | Lecture topic                             | Important links           |
-+============+===========================================+===========================+
-| 01.04.2024 | Lecture: Introduction to technical track. | Lab no. 5 description     |
-+------------+-------------------------------------------+---------------------------+
++------------+---------------------+--------------------------------------------------------------+
+| Date       | Lecture topic       | Important links                                              |
++============+================================================+===================================+
+| 01.04.2024 | Lecture:            | Lab no. 5 description                                        |
+|            | Introduction to     |                                                              |
+|            | technical track.    |                                                              |
++------------+---------------------+--------------------------------------------------------------+
+| 01.04.2024 | Seminar: Local      | N/A                                                          |
+|            | setup. Choose       |                                                              |
+|            | website.            |                                                              |
++------------+---------------------+--------------------------------------------------------------+
+| 08.04.2024 | Lecture: 3rd party  | N/A                                                          |
+|            | libraries. Browser  |                                                              |
+|            | headers.            |                                                              |
++------------+---------------------+--------------------------------------------------------------+
+| 08.04.2024 | Seminar:            | `Листинг <./seminars/seminar_04_08_2024/try_requests.py>`__. |
+|            | ``requests``:   .   |                                                              |
+|            | install, API.       |                                                              |
++------------+---------------------+--------------------------------------------------------------+
+| 15.04.2024 | Lecture: HTML       | N/A                                                          |
+|            | structure. ``bs4``  |                                                              |
+|            | library.            |                                                              |
++------------+---------------------+--------------------------------------------------------------+
+| 15.04.2024 | Seminar:            | `Листинг <./seminars/seminar_04_15_2024/try_bs.py>`__.       |
+|            | ``bs4``:   .        |                                                              |
+|            | install, API.       |                                                              |
++------------+---------------------+--------------------------------------------------------------+
 
 You can find a more complete summary from lectures in :ref:`ctlr-lectures-label`.
 
@@ -160,9 +182,9 @@ Resources
 ---------
 
 1. `Academic performance
-   <https://docs.google.com/spreadsheets/d/1ZEMhQy039vf4mCrM6UZF_GnfDWsCTjmbazibuCM_t7s/edit#gid=0>`__
+   <https://docs.google.com/spreadsheets/d/1DGxzwFYhJUIYHq13LMqA756tQD0sBP0_V0jt4KMaAZ0/edit#gid=0>`__
 2. `Media websites list
-   <https://docs.google.com/spreadsheets/d/1ENdfTb7ZOoVMeBcldSJuH4IWMYtHKO8Y94Qqq_e3Q34/edit#gid=0>`__
+   <https://docs.google.com/spreadsheets/d/1r-VN2oZVwhZ6CbA8gRbNRTCkUOHvef5yzm3ElxqL6bo/edit#gid=0>`__
 3. `Documentation website <https://fipl-hse.github.io/>`__
 4. `Python programming course from previous semester
    <https://github.com/fipl-hse/2023-2-level-labs>`__
