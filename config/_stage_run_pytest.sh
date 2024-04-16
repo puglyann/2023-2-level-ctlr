@@ -26,7 +26,14 @@ else
   LABEL="${PYTEST_LABEL}"
 fi
 
-python -m pytest -m "${LABEL}" --capture=no
+if [[ "$LAB_PATH" == "lab_5_scrapper" ]]; then
+  python -m pytest -m "${LABEL}" --capture=no --ignore=lab_6_pipeline
+elif [[ "$LAB_PATH" == "lab_6_pipeline" && ${TARGET_SCORE} == 10 ]]; then
+  python -m pytest -m "${LABEL}" --capture=no
+else
+  python -m pytest -m "${LABEL}" --capture=no --ignore lab_6_pipeline/tests/s4_pos_frequency_pipeline_test.py --ignore lab_6_pipeline/tests/s3_6_advanced_pipeline_test.py
+fi
+
 ret=$?
 
 if [ "$ret" = 5 ]; then
