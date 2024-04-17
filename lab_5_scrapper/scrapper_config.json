@@ -1,9 +1,18 @@
 {
-    "seed_urls": [],
-    "headers": {},
-    "total_articles_to_find_and_parse": 0,
-    "encoding": "",
-    "timeout": 0,
-    "should_verify_certificate": true,
+    "seed_urls": ['https://new-science.ru/category/news/',
+    'https://new-science.ru/category/news/page/2/',
+    'https://new-science.ru/category/news/page/3/',
+    'https://new-science.ru/category/news/page/4/',
+    'https://new-science.ru/category/news/page/5/'],
+    "headers": {
+        'cookie': 'tmr_lvid=96193faea03974e9ba060bb52dd17124; tmr_lvidTS=1712564279666; domain_sid=hXG8oXAC6XaZOd48zcdbU%3A1712564280681; _ym_uid=1712564281620231425; _ym_d=1712564281; _ym_isad=2; _ym_visorc=w; tmr_detect=0%7C1712564284491',
+    'accept-language': 'ru,en;q=0.9',
+    'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 YaBrowser/24.1.0.0 Safari/537.36'
+    },
+    "total_articles_to_find_and_parse": 10,
+    "encoding": "utf-8",
+    "timeout": 1,
+    "should_verify_certificate": false,
     "headless_mode": true
 }
