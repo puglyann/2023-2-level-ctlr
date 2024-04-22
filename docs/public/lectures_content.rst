@@ -29,4 +29,9 @@ switch on exception raising.
 Lecture 3. HTML structure. ``bs4`` library
 ------------------------------------------
 
-TBD.
+Introduction to HTML scraping.
+Key strategies for finding elements:
+by ``id``, by class, by tag name, by child-parent relations, and by combination
+of aforementioned approaches. Making requests with ``requests`` API.
+Extracting headers from browser. Making randomized sleeps
+in code. `bs4`: installation, basic API. Finding elements in `HTML` page with `find`, `find_all`.

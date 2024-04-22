@@ -90,6 +90,14 @@ Lectures history
 |            | ``bs4``:   .        |                                                              |
 |            | install, API.       |                                                              |
 +------------+---------------------+--------------------------------------------------------------+
+| 22.04.2024 | Lecture: Filesystem | N/A                                                          |
+|            | with ``pathlib``.   |                                                              |
+|            | Dates.              |                                                              |
++------------+---------------------+--------------------------------------------------------------+
+| 22.04.2024 | Seminar:            | `Листинг <./seminars/seminar_04_22_2024/try_fs.py>`__.       |
+|            | filesystem with     | `Листинг <./seminars/seminar_04_22_2024/try_json.py>`__.     |
+|            | ``pathlib``, dates. | `Листинг <./seminars/seminar_04_22_2024/try_dates.py>`__.    |
++------------+---------------------+--------------------------------------------------------------+
 
 You can find a more complete summary from lectures in :ref:`ctlr-lectures-label`.
 
