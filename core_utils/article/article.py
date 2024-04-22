@@ -7,8 +7,6 @@ import re
 from datetime import datetime
 from typing import Optional, Protocol, Sequence
 
-from stanza.utils.conll import Document
-
 from core_utils.constants import ASSETS_PATH
 
 
@@ -110,7 +108,7 @@ class Article:
     """
     #: A date
     date: Optional[datetime]
-    _conllu_sentences: Sequence[SentenceProtocol] | Document
+    _conllu_sentences: Sequence[SentenceProtocol]
 
     def __init__(self, url: Optional[str], article_id: int) -> None:
         """
@@ -204,8 +202,6 @@ class Article:
         Returns:
             str: Cleaned text.
         """
-        if isinstance(self._conllu_sentences, Document):
-            return str(self._conllu_sentences.text)
         return ' '.join([sentence.get_cleaned_sentence() for
                          sentence in self._conllu_sentences])
 
