@@ -93,7 +93,7 @@ class Config:
             headless_mode=conf['headless_mode']
         )
 
-    def _validate_config_content(self) -> None: #ЧЕТО КОСЯЧИТ ПЕРЕДЕЛАТЬ
+    def _validate_config_content(self) -> None:
         """
         Ensure configuration parameters are not corrupt.
         """
@@ -247,16 +247,15 @@ class Crawler:
         Find articles.
         """
         urls = []
+        while len(urls) < self.config.get_num_articles():
+            for url in self.get_search_urls():
+                response = make_request(url, self.config)
 
-        for url in self.get_search_urls():
-            response = make_request(url, self.config)
+                if not response.ok:
+                    continue
 
-            if not response.ok:
-                continue
-
-            src = response.text
-            soup = BeautifulSoup(src, 'lxml')
-            urls.append(self._extract_url(soup))
+                soup = BeautifulSoup(response.text, 'lxml')
+                urls.append(self._extract_url(soup))
 
         self.urls.extend(urls)
 
@@ -318,6 +317,23 @@ class HTMLParser:
         Args:
             article_soup (bs4.BeautifulSoup): BeautifulSoup instance
         """
+        title = article_soup.find(class_='post-title entry-title')
+        if title:
+            self.article.title = title.text
+
+        author = article_soup.find(tag_='meta content', property_='og:site_name')
+        if not author:
+            self.article.author.append('NOT FOUND')
+        else:
+            self.article.author.append(author.text)
+
+        date_str = article_soup.find(class_='date meta-item tie-icon')
+        if date_str:
+            self.article.date = self.unify_date_format(date_str.text)
+
+        tags = article_soup.find_all(class_='mega-links-head')
+        for tag in tags:
+            self.article.topics.append(tag.text)
 
     def unify_date_format(self, date_str: str) -> datetime.datetime:
         """
@@ -329,6 +345,9 @@ class HTMLParser:
         Returns:
             datetime.datetime: Datetime object
         """
+        dt_object = datetime.datetime.strptime(date_str, '%d.%m.%Y')
+
+        return dt_object
 
     def parse(self) -> Union[Article, bool, list]:
         """
