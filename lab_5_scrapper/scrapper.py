@@ -5,13 +5,17 @@ Crawler implementation.
 import json
 import pathlib
 import re
+import datetime
+
 import requests
+from random import randrange
+from time import sleep
 
 from typing import Pattern, Union
 from core_utils.config_dto import ConfigDTO
 from bs4 import BeautifulSoup
 from core_utils.article.article import Article
-from core_utils.article.io import to_raw
+from core_utils.article.io import to_raw, to_meta
 from core_utils.constants import CRAWLER_CONFIG_PATH, ASSETS_PATH
 
 
@@ -189,6 +193,7 @@ def make_request(url: str, config: Config) -> requests.models.Response:
     Returns:
         requests.models.Response: A response from a request
     """
+    sleep(randrange(3))
     return requests.get(url=url,
                         headers=config.get_headers(),
                         timeout=config.get_timeout(),
@@ -227,7 +232,7 @@ class Crawler:
         for div in article_bs.find_all('div', {'class': 'post-details'}):
             for urls in div.select('a'):
                 url = urls['href']
-        return self.url_pattern + urls
+        return self.url_pattern + url
     
 
     def find_articles(self) -> None:
@@ -276,6 +281,10 @@ class HTMLParser:
             article_id (int): Article id
             config (Config): Configuration
         """
+        self.full_url = full_url
+        self.article_id = article_id
+        self.config = config
+        self.article = Article(full_url, article_id)
 
     def _fill_article_with_text(self, article_soup: BeautifulSoup) -> None:
         """
