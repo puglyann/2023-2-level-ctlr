@@ -5,20 +5,19 @@ Crawler implementation.
 import datetime
 import json
 import pathlib
-import shutil
 import re
+import shutil
 from random import randrange
 from time import sleep
 from typing import Pattern, Union
 
 import requests
-
 from bs4 import BeautifulSoup
+
 from core_utils.article.article import Article
-from core_utils.article.io import to_raw, to_meta
+from core_utils.article.io import to_meta, to_raw
 from core_utils.config_dto import ConfigDTO
-from core_utils.constants import ASSETS_PATH
-from core_utils.constants import CRAWLER_CONFIG_PATH
+from core_utils.constants import ASSETS_PATH, CRAWLER_CONFIG_PATH
 
 
 class IncorrectVerifyError(Exception):
@@ -334,6 +333,8 @@ class HTMLParser:
         tags = article_soup.find_all(class_='mega-links-head')
         for tag in tags:
             self.article.topics.append(tag.text)
+
+        return self.article
 
     def unify_date_format(self, date_str: str) -> datetime.datetime:
         """
