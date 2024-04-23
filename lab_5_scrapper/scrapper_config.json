@@ -12,7 +12,7 @@
     },
     "total_articles_to_find_and_parse": 10,
     "encoding": "utf-8",
-    "timeout": 1,
-    "should_verify_certificate": false,
+    "timeout": 4,
+    "should_verify_certificate": true,
     "headless_mode": true
 }

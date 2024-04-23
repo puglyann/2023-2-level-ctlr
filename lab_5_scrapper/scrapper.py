@@ -2,44 +2,50 @@
 Crawler implementation.
 """
 # pylint: disable=too-many-arguments, too-many-instance-attributes, unused-import, undefined-variable
+import datetime
 import json
 import pathlib
+import shutil
 import re
-import datetime
-
-import requests
 from random import randrange
 from time import sleep
-
 from typing import Pattern, Union
-from core_utils.config_dto import ConfigDTO
+
+import requests
+
 from bs4 import BeautifulSoup
 from core_utils.article.article import Article
 from core_utils.article.io import to_raw, to_meta
-from core_utils.constants import CRAWLER_CONFIG_PATH, ASSETS_PATH
+from core_utils.config_dto import ConfigDTO
+from core_utils.constants import ASSETS_PATH
+from core_utils.constants import CRAWLER_CONFIG_PATH
 
 
-class IncorrectVerifyError:
+class IncorrectVerifyError(Exception):
     pass
 
 
-class IncorrectSeedURLError:
+class IncorrectSeedURLError(Exception):
     pass
 
 
-class IncorrectNumberOfArticlesError:
+class IncorrectNumberOfArticlesError(Exception):
     pass
 
 
-class IncorrectHeadersError:
+class IncorrectHeadersError(Exception):
     pass
 
 
-class IncorrectEncodingError:
+class IncorrectEncodingError(Exception):
     pass
 
 
-class IncorrectTimeoutError:
+class IncorrectTimeoutError(Exception):
+    pass
+
+
+class NumberOfArticlesOutOfRangeError(Exception):
     pass
 
 
@@ -109,13 +115,16 @@ class Config:
         if not isinstance(conf['encoding'], str):
             raise IncorrectEncodingError
 
-        if not (isinstance(conf['timeout'], int) and (0 < conf['timeout'] < 60)):
+        if not (isinstance(conf['timeout'], int) and (0 < conf['timeout'] < 60)
+        ):
             raise IncorrectTimeoutError
 
         if (not isinstance(conf['should_verify_certificate'], bool)) \
                 or (not isinstance(conf['headless_mode'], bool)):
             raise IncorrectVerifyError
 
+        if num_of_a not in range(1, 151):
+            raise NumberOfArticlesOutOfRangeError
 
     def get_seed_urls(self) -> list[str]:
         """
@@ -125,7 +134,6 @@ class Config:
             list[str]: Seed urls
         """
         return self._seed_urls
-
 
     def get_num_articles(self) -> int:
         """
@@ -233,7 +241,6 @@ class Crawler:
             for urls in div.select('a'):
                 url = urls['href']
         return self.url_pattern + url
-    
 
     def find_articles(self) -> None:
         """
@@ -293,14 +300,31 @@ class HTMLParser:
         Args:
             article_soup (bs4.BeautifulSoup): BeautifulSoup instance
         """
+        all_body = article_soup.find_all('div')
 
-    def _fill_article_with_meta_information(self, article_soup: BeautifulSoup) -> None:
+        texts = []
+        if all_body:
+            all_divs = all_body[0].find_all('div', class_='entry-content entry clearfix')
+            texts = []
+            for div_bs in all_divs:
+                texts.append(div_bs.text)
+
+        self.article.text = ''.join(texts)
+
+    def _fill_article_with_meta_information(self, article_soup: BeautifulSoup) -> Article:
         """
         Find meta information of article.
 
         Args:
             article_soup (bs4.BeautifulSoup): BeautifulSoup instance
         """
+        response = make_request(self.full_url, self.config)
+        if response.ok:
+            article_bs = BeautifulSoup(response.text, 'lxml')
+            self._fill_article_with_text(article_bs)
+            self._fill_article_with_meta_information(article_bs)
+
+        return self.article
 
     def unify_date_format(self, date_str: str) -> datetime.datetime:
         """
@@ -329,15 +353,27 @@ def prepare_environment(base_path: Union[pathlib.Path, str]) -> None:
     Args:
         base_path (Union[pathlib.Path, str]): Path where articles stores
     """
+    if base_path.exists():
+        shutil.rmtree(base_path)
+    base_path.mkdir(parents=True)
 
 
 def main() -> None:
     """
     Entrypoint for scrapper module.
     """
+    conf = Config(CRAWLER_CONFIG_PATH)
+    crawler = Crawler(conf)
+    crawler.find_articles()
+    prepare_environment(ASSETS_PATH)
+
+    for id_num, url in enumerate(crawler.urls, 1):
+        parser = HTMLParser(url, id_num, conf)
+        article = parser.parse()
+        if isinstance(article, Article):
+            to_raw(article)
+            to_meta(article)
 
 
 if __name__ == "__main__":
     main()
-
-
