@@ -105,7 +105,7 @@ class Config:
             raise IncorrectSeedURLError
 
         num_of_a = conf['total_articles_to_find_and_parse']
-        if not isinstance(num_of_a, int) or num_of_a < 0:
+        if not isinstance(num_of_a, int) or not num_of_a > 0:
             raise IncorrectNumberOfArticlesError
 
         if num_of_a not in range(1, 151):
@@ -117,12 +117,13 @@ class Config:
         if not isinstance(conf['encoding'], str):
             raise IncorrectEncodingError
 
-        if not (isinstance(conf['timeout'], int) and (0 < conf['timeout'] < 60)
-        ):
+        if not isinstance(conf['timeout'], int) or not (0 <= conf['timeout'] < 60):
             raise IncorrectTimeoutError
 
-        if (not isinstance(conf['should_verify_certificate'], bool)) \
-                or (not isinstance(conf['headless_mode'], bool)):
+        if not isinstance(conf['should_verify_certificate'], bool):
+            raise IncorrectVerifyError
+
+        if not isinstance(conf['headless_mode'], bool):
             raise IncorrectVerifyError
 
     def get_seed_urls(self) -> list[str]:
