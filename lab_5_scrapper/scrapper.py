@@ -93,7 +93,7 @@ class Config:
             headless_mode=conf['headless_mode']
         )
 
-    def _validate_config_content(self) -> None:
+    def _validate_config_content(self) -> None: #ЧЕТО КОСЯЧИТ ПЕРЕДЕЛАТЬ
         """
         Ensure configuration parameters are not corrupt.
         """
@@ -101,13 +101,15 @@ class Config:
             conf = json.load(file)
 
         if not (isinstance(conf['seed_urls'], list)
-                and all(re.match(r"https?://(www.)?", seed_url) for seed_url in conf['seed_urls'])):
+                and all(re.match(r'https?://(www.)?', seed_url) for seed_url in conf['seed_urls'])):
             raise IncorrectSeedURLError
 
         num_of_a = conf['total_articles_to_find_and_parse']
-        if (not isinstance(num_of_a, int) or num_of_a < 0 or isinstance(num_of_a, bool)) \
-                or (isinstance(num_of_a, int) and not (1 <= num_of_a <= 150)):
+        if not isinstance(num_of_a, int) or num_of_a < 0:
             raise IncorrectNumberOfArticlesError
+
+        if num_of_a not in range(1, 151):
+            raise NumberOfArticlesOutOfRangeError
 
         if not isinstance(conf['headers'], dict):
             raise IncorrectHeadersError
@@ -122,9 +124,6 @@ class Config:
         if (not isinstance(conf['should_verify_certificate'], bool)) \
                 or (not isinstance(conf['headless_mode'], bool)):
             raise IncorrectVerifyError
-
-        if num_of_a not in range(1, 151):
-            raise NumberOfArticlesOutOfRangeError
 
     def get_seed_urls(self) -> list[str]:
         """
