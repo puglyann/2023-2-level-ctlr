@@ -333,8 +333,6 @@ class HTMLParser:
         for tag in tags:
             self.article.topics.append(tag.text)
 
-        return self.article
-
     def unify_date_format(self, date_str: str) -> datetime.datetime:
         """
         Unify date format.
