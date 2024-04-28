@@ -276,7 +276,6 @@ class HTMLParser:
     """
     HTMLParser implementation.
     """
-
     def __init__(self, full_url: str, article_id: int, config: Config) -> None:
         """
         Initialize an instance of the HTMLParser class.
@@ -309,7 +308,7 @@ class HTMLParser:
 
         self.article.text = ''.join(texts)
 
-    def _fill_article_with_meta_information(self, article_soup: BeautifulSoup) -> Article:
+    def _fill_article_with_meta_information(self, article_soup: BeautifulSoup) -> None:
         """
         Find meta information of article.
 
@@ -346,9 +345,7 @@ class HTMLParser:
         Returns:
             datetime.datetime: Datetime object
         """
-        dt_object = datetime.datetime.strptime(date_str, '%d.%m.%Y')
-
-        return dt_object
+        return datetime.datetime.strptime(date_str, '%d.%m.%Y')
 
     def parse(self) -> Union[Article, bool, list]:
         """
