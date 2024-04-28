@@ -223,7 +223,7 @@ class Crawler:
         """
         self.config = config
         self.urls = []
-        self.url_pattern = 'https://new-science.ru'
+        self.url_pattern = self.config.get_seed_urls()[0].split('/category')[0]
 
     def _extract_url(self, article_bs: BeautifulSoup) -> str:
         """
@@ -276,6 +276,7 @@ class HTMLParser:
     """
     HTMLParser implementation.
     """
+
     def __init__(self, full_url: str, article_id: int, config: Config) -> None:
         """
         Initialize an instance of the HTMLParser class.
