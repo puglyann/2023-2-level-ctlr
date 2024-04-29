@@ -21,7 +21,7 @@ else
   )
 fi
 
-python -m pylint --exit-zero --rcfile config/stage_1_style_tests/.pylintrc "${DIRS_TO_CHECK[@]}"
+python -m pylint --exit-zero "${DIRS_TO_CHECK[@]}"
 
 mypy "${DIRS_TO_CHECK[@]}"
 

@@ -9,13 +9,13 @@
     "topics": [],
     "pos_frequencies": {
         "ADJ": 2,
-        "NOUN": 6,
+        "PUNCT": 3,
+        "NOUN": 4,
         "ADV": 1,
         "VERB": 1,
         "ADP": 3,
+        "PROPN": 2,
         "CCONJ": 1,
         "NUM": 1,
-        "X": 1,
-        "PUNCT": 1
-    }
+        "X": 1}
 }

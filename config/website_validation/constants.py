@@ -3,7 +3,7 @@ Constants for site checking.
 """
 from enum import Enum
 
-from config.test_params import PROJECT_ROOT
+from admin_utils.test_params import PROJECT_ROOT
 
 HEADERS_ATTEMPTS: list[list] = [
     [],

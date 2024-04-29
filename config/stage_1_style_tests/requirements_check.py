@@ -17,7 +17,7 @@ def get_paths() -> list[Path]:
         list[Path]: Paths to non-python files
     """
     return [
-        path 
+        path
         for path in PROJECT_ROOT.rglob('requirements*.txt')
         if 'venv' not in str(path)
     ]

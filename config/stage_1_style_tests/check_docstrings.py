@@ -18,11 +18,12 @@ def get_files() -> list:
     Returns:
         list: File paths
     """
-    directories = ['config', 'core_utils']
-    file_paths = [file for directory in directories
-                  for file in Path(PROJECT_ROOT / directory).glob('**/*.py')
-                  if file.name != '__init__.py' and 'ud_validator' not in str(file)]
-    return file_paths
+    return [
+        file
+        for directory in ['config', 'core_utils']
+        for file in Path(PROJECT_ROOT / directory).glob('**/*.py')
+        if file.name != '__init__.py' and 'ud_validator' not in str(file)
+    ]
 
 
 def check_with_pydoctest(path_to_file: Path, path_to_config: Path) \
@@ -120,8 +121,6 @@ def main() -> None:
             lab_path / 'scrapper.py',
             lab_path / 'scrapper_dynamic.py',
             lab_path / 'pipeline.py',
-            lab_path / 'stanza_pipeline.py',
-            lab_path / 'pos_frequency_pipeline.py',
         )
         for path in paths:
             if not path.exists():

@@ -1,0 +1,206 @@
+[
+  [
+    {
+      "id": 1,
+      "text": "Красивая",
+      "lemma": "красивый",
+      "upos": "ADJ",
+      "feats": "Case=Nom|Degree=Pos|Gender=Fem|Number=Sing",
+      "head": 0,
+      "deprel": "root",
+      "start_char": 0,
+      "end_char": 8
+    },
+    {
+      "id": 2,
+      "text": "-",
+      "lemma": "-",
+      "upos": "PUNCT",
+      "head": 3,
+      "deprel": "punct",
+      "start_char": 9,
+      "end_char": 10
+    },
+    {
+      "id": 3,
+      "text": "мама",
+      "lemma": "мама",
+      "upos": "NOUN",
+      "feats": "Animacy=Anim|Case=Nom|Gender=Fem|Number=Sing",
+      "head": 1,
+      "deprel": "parataxis",
+      "start_char": 11,
+      "end_char": 15
+    },
+    {
+      "id": 4,
+      "text": "красиво",
+      "lemma": "красиво",
+      "upos": "ADV",
+      "feats": "Degree=Pos",
+      "head": 1,
+      "deprel": "advmod",
+      "start_char": 16,
+      "end_char": 23
+    },
+    {
+      "id": 5,
+      "text": ",",
+      "lemma": ",",
+      "upos": "PUNCT",
+      "head": 6,
+      "deprel": "punct",
+      "start_char": 23,
+      "end_char": 24
+    },
+    {
+      "id": 6,
+      "text": "училась",
+      "lemma": "учиться",
+      "upos": "VERB",
+      "feats": "Aspect=Imp|Gender=Fem|Mood=Ind|Number=Sing|Tense=Past|VerbForm=Fin|Voice=Mid",
+      "head": 1,
+      "deprel": "conj",
+      "start_char": 25,
+      "end_char": 32
+    },
+    {
+      "id": 7,
+      "text": "в",
+      "lemma": "в",
+      "upos": "ADP",
+      "head": 8,
+      "deprel": "case",
+      "start_char": 33,
+      "end_char": 34
+    },
+    {
+      "id": 8,
+      "text": "ПДД",
+      "lemma": "ПДД",
+      "upos": "PROPN",
+      "feats": "Animacy=Inan|Case=Loc|Gender=Masc|Number=Sing",
+      "head": 6,
+      "deprel": "obl",
+      "start_char": 35,
+      "end_char": 38
+    },
+    {
+      "id": 9,
+      "text": "и",
+      "lemma": "и",
+      "upos": "CCONJ",
+      "head": 10,
+      "deprel": "cc",
+      "start_char": 39,
+      "end_char": 40
+    },
+    {
+      "id": 10,
+      "text": "ЖКУ",
+      "lemma": "ЖКУ",
+      "upos": "PROPN",
+      "feats": "Animacy=Inan|Case=Loc|Gender=Masc|Number=Sing",
+      "head": 8,
+      "deprel": "conj",
+      "start_char": 41,
+      "end_char": 44
+    },
+    {
+      "id": 11,
+      "text": "по",
+      "lemma": "по",
+      "upos": "ADP",
+      "head": 12,
+      "deprel": "case",
+      "start_char": 45,
+      "end_char": 47
+    },
+    {
+      "id": 12,
+      "text": "адресу",
+      "lemma": "адрес",
+      "upos": "NOUN",
+      "feats": "Animacy=Inan|Case=Dat|Gender=Masc|Number=Sing",
+      "head": 6,
+      "deprel": "obl",
+      "start_char": 48,
+      "end_char": 54
+    },
+    {
+      "id": 13,
+      "text": "Львовская",
+      "lemma": "львовский",
+      "upos": "ADJ",
+      "feats": "Case=Nom|Degree=Pos|Gender=Fem|Number=Sing",
+      "head": 15,
+      "deprel": "amod",
+      "start_char": 55,
+      "end_char": 64
+    },
+    {
+      "id": 14,
+      "text": "10",
+      "lemma": "10",
+      "upos": "NUM",
+      "feats": "NumType=Card",
+      "head": 15,
+      "deprel": "nummod",
+      "start_char": 65,
+      "end_char": 67
+    },
+    {
+      "id": 15,
+      "text": "лет",
+      "lemma": "год",
+      "upos": "NOUN",
+      "feats": "Animacy=Inan|Case=Gen|Gender=Masc|Number=Plur",
+      "head": 12,
+      "deprel": "nmod",
+      "start_char": 68,
+      "end_char": 71
+    },
+    {
+      "id": 16,
+      "text": "с",
+      "lemma": "с",
+      "upos": "ADP",
+      "head": 17,
+      "deprel": "case",
+      "start_char": 72,
+      "end_char": 73
+    },
+    {
+      "id": 17,
+      "text": "почтой",
+      "lemma": "почта",
+      "upos": "NOUN",
+      "feats": "Animacy=Inan|Case=Ins|Gender=Fem|Number=Sing",
+      "head": 15,
+      "deprel": "nmod",
+      "start_char": 74,
+      "end_char": 80
+    },
+    {
+      "id": 18,
+      "text": "test",
+      "lemma": "test",
+      "upos": "X",
+      "feats": "Foreign=Yes",
+      "head": 17,
+      "deprel": "flat:foreign",
+      "start_char": 81,
+      "end_char": 85
+    },
+    {
+      "id": 19,
+      "text": ".",
+      "lemma": ".",
+      "upos": "PUNCT",
+      "head": 1,
+      "deprel": "punct",
+      "start_char": 86,
+      "end_char": 87
+    }
+  ]
+]

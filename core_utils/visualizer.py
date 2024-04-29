@@ -12,6 +12,13 @@ try:
 except ImportError:  # pragma: no cover
     print('No libraries installed. Failed to import.')
 
+try:
+    import networkx as nx
+    from networkx import DiGraph
+except ImportError:  # pragma: no cover
+    DiGraph = None  # type: ignore
+    print('No libraries installed. Failed to import.')
+
 from core_utils.article.article import Article
 
 
@@ -46,3 +53,32 @@ def visualize(article: Article, path_to_save: Path) -> None:
     plt.ylim(0, y_max)
 
     plt.savefig(path_to_save)
+
+
+def show_graph(graph: DiGraph, graph_path: str) -> None:
+    """
+    Visualization for debug.
+
+    Args:
+        graph (DiGraph): Graph to check
+        graph_path (str): Path to graph
+    """
+    # Check what to use on Windows! Below line is obviously only for macOS users
+    matplotlib.use("MacOSX")
+
+    pos = nx.nx_agraph.graphviz_layout(graph, prog="dot")
+
+    nx.draw(
+        graph,
+        pos,
+        with_labels=True,
+        labels=nx.get_node_attributes(graph, "upos"),
+        **{
+            "node_color": "orange",
+            "edge_color": "powderblue",
+            "node_size": 400,
+            "width": 2,
+        }
+    )
+    plt.savefig(graph_path, format='png')
+    plt.close()

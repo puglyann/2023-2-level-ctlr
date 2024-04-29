@@ -1,9 +1,8 @@
 """
 Pipeline for CONLL-U formatting.
 """
-# pylint: disable=too-few-public-methods, unused-import, undefined-variable
+# pylint: disable=too-few-public-methods, unused-import, undefined-variable, too-many-nested-blocks
 import pathlib
-from typing import List
 
 
 class CorpusManager:
@@ -38,117 +37,205 @@ class CorpusManager:
         """
 
 
-class ConlluToken:
-    """
-    Representation of the CONLL-U Token.
-    """
-
-    def __init__(self, token: spacy.tokens.Token) -> None:
-        """
-        Initialize an instance of the ConlluToken class.
-
-        Args:
-            token (spacy.tokens.Token): Token
-        """
-
-    def get_pos(self) -> str:
-        """
-        Get POS from ConlluToken.
-
-        Returns:
-            str: POS from ConlluToken
-        """
-
-    def get_conllu_text(self) -> str:
-        """
-        Get string representation of the token for conllu files.
-
-        Returns:
-            str: String representation of the token
-        """
-
-    def get_cleaned(self) -> str:
-        """
-        Get lowercase original form of a token.
-
-        Returns:
-            str: Lowercase original form of a token
-        """
-
-
-class ConlluSentence(SentenceProtocol):
-    """
-    Representation of a sentence in the CONLL-U format.
-    """
-
-    def __init__(self, position: int, text: str, tokens: list[ConlluToken]) -> None:
-        """
-        Initialize an instance of the ConlluSentence class.
-
-        Args:
-            position (int): Sentence position
-            text (str): Sentence
-            tokens (list[ConlluToken]): Tokens as ConlluToken instances
-        """
-
-    def get_conllu_text(self, include_morphological_tags: bool) -> str:
-        """
-        Create string representation of the sentence.
-
-        Args:
-            include_morphological_tags (bool): Flag to include morphological information
-
-        Returns:
-            str: String representation of the sentence
-        """
-
-    def get_cleaned_sentence(self) -> str:
-        """
-        Get lowercase representation of the sentence.
-
-        Returns:
-            str: Lowercase representation of the sentence
-        """
-
-    def get_tokens(self) -> list[ConlluToken]:
-        """
-        Get tokens from ConlluSentence.
-
-        Returns:
-            list[ConlluToken]: Tokens from ConlluSentence
-        """
-
-
-# pylint: disable=too-few-public-methods
-
-
-class MorphologicalAnalysisPipeline:
+class TextProcessingPipeline(PipelineProtocol):
     """
     Preprocess and morphologically annotate sentences into the CONLL-U format.
     """
 
-    def __init__(self, corpus_manager: CorpusManager) -> None:
+    def __init__(
+        self, corpus_manager: CorpusManager, analyzer: LibraryWrapper | None = None
+    ) -> None:
         """
-        Initialize an instance of the MorphologicalAnalysisPipeline class.
+        Initialize an instance of the TextProcessingPipeline class.
 
         Args:
             corpus_manager (CorpusManager): CorpusManager instance
-        """
-
-    def _process(self, text: str) -> List[ConlluSentence]:
-        """
-        Represent text as the list of ConlluSentence.
-
-        Args:
-            text (str): Text
-
-        Returns:
-            List[ConlluSentence]: Text as the list of ConlluSentence
+            analyzer (LibraryWrapper | None): Analyzer instance
         """
 
     def run(self) -> None:
         """
         Perform basic preprocessing and write processed text to files.
+        """
+
+
+class UDPipeAnalyzer(LibraryWrapper):
+    """
+    Wrapper for udpipe library.
+    """
+
+    _analyzer: AbstractCoNLLUAnalyzer
+
+    def __init__(self) -> None:
+        """
+        Initialize an instance of the UDPipeAnalyzer class.
+        """
+
+    def _bootstrap(self) -> AbstractCoNLLUAnalyzer:
+        """
+        Load and set up the UDPipe model.
+
+        Returns:
+            AbstractCoNLLUAnalyzer: Analyzer instance
+        """
+
+    def analyze(self, texts: list[str]) -> list[StanzaDocument | str]:
+        """
+        Process texts into CoNLL-U formatted markup.
+
+        Args:
+            texts (list[str]): Collection of texts
+
+        Returns:
+            list[StanzaDocument | str]: List of documents
+        """
+
+    def to_conllu(self, article: Article) -> None:
+        """
+        Save content to ConLLU format.
+
+        Args:
+            article (Article): Article containing information to save
+        """
+
+
+class StanzaAnalyzer(LibraryWrapper):
+    """
+    Wrapper for stanza library.
+    """
+
+    _analyzer: AbstractCoNLLUAnalyzer
+
+    def __init__(self) -> None:
+        """
+        Initialize an instance of the StanzaAnalyzer class.
+        """
+
+    def _bootstrap(self) -> AbstractCoNLLUAnalyzer:
+        """
+        Load and set up the Stanza model.
+
+        Returns:
+            AbstractCoNLLUAnalyzer: Analyzer instance
+        """
+
+    def analyze(self, texts: list[str]) -> list[StanzaDocument]:
+        """
+        Process texts into CoNLL-U formatted markup.
+
+        Args:
+            texts (list[str]): Collection of texts
+
+        Returns:
+            list[StanzaDocument]: List of documents
+        """
+
+    def to_conllu(self, article: Article) -> None:
+        """
+        Save content to ConLLU format.
+
+        Args:
+            article (Article): Article containing information to save
+        """
+
+    def from_conllu(self, article: Article) -> CoNLLUDocument:
+        """
+        Load ConLLU content from article stored on disk.
+
+        Args:
+            article (Article): Article to load
+
+        Returns:
+            CoNLLUDocument: Document ready for parsing
+        """
+
+
+class POSFrequencyPipeline:
+    """
+    Count frequencies of each POS in articles, update meta info and produce graphic report.
+    """
+
+    def __init__(self, corpus_manager: CorpusManager, analyzer: LibraryWrapper) -> None:
+        """
+        Initialize an instance of the POSFrequencyPipeline class.
+
+        Args:
+            corpus_manager (CorpusManager): CorpusManager instance
+            analyzer (LibraryWrapper): Analyzer instance
+        """
+
+    def run(self) -> None:
+        """
+        Visualize the frequencies of each part of speech.
+        """
+
+    def _count_frequencies(self, article: Article) -> dict[str, int]:
+        """
+        Count POS frequency in Article.
+
+        Args:
+            article (Article): Article instance
+
+        Returns:
+            dict[str, int]: POS frequencies
+        """
+
+
+class PatternSearchPipeline(PipelineProtocol):
+    """
+    Search for the required syntactic pattern.
+    """
+
+    def __init__(
+        self, corpus_manager: CorpusManager, analyzer: LibraryWrapper, pos: tuple[str, ...]
+    ) -> None:
+        """
+        Initialize an instance of the PatternSearchPipeline class.
+
+        Args:
+            corpus_manager (CorpusManager): CorpusManager instance
+            analyzer (LibraryWrapper): Analyzer instance
+            pos (tuple[str, ...]): Root, Dependency, Child part of speech
+        """
+
+    def _make_graphs(self, doc: CoNLLUDocument) -> list[DiGraph]:
+        """
+        Make graphs for a document.
+
+        Args:
+            doc (CoNLLUDocument): Document for patterns searching
+
+        Returns:
+            list[DiGraph]: Graphs for the sentences in the document
+        """
+
+    def _add_children(
+        self, graph: DiGraph, subgraph_to_graph: dict, node_id: int, tree_node: TreeNode
+    ) -> None:
+        """
+        Add children to TreeNode.
+
+        Args:
+            graph (DiGraph): Sentence graph to search for a pattern
+            subgraph_to_graph (dict): Matched subgraph
+            node_id (int): ID of root node of the match
+            tree_node (TreeNode): Root node of the match
+        """
+
+    def _find_pattern(self, doc_graphs: list) -> dict[int, list[TreeNode]]:
+        """
+        Search for the required pattern.
+
+        Args:
+            doc_graphs (list): A list of graphs for the document
+
+        Returns:
+            dict[int, list[TreeNode]]: A dictionary with pattern matches
+        """
+
+    def run(self) -> None:
+        """
+        Search for a pattern in documents and writes found information to JSON file.
         """
 
 

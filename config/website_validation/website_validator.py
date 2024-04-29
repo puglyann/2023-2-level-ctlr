@@ -1,6 +1,7 @@
 """
 Validate websites parameters.
 """
+# pylint: disable=import-error
 import json
 import re
 import time

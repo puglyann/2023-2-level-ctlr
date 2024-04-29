@@ -190,7 +190,7 @@ jobs:
           bash admin_utils/stage_2_crawler_tests/_stage_collect_articles.sh "$PR_NAME" "$PR_AUTHOR"
           bash config/_stage_run_pytest.sh "$PR_NAME" "$PR_AUTHOR" -l lab_5_scrapper -m stage_2_4_dataset_volume_check
       - name: Archive raw dataset
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: raw-dataset
           path: |
@@ -212,7 +212,7 @@ jobs:
         uses: fipl-hse/setup-env-action@v0.10
       - name: Download previously collected dataset
         continue-on-error: true
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: raw-dataset
       - name: Run metadata validation
@@ -262,7 +262,7 @@ jobs:
         uses: fipl-hse/setup-env-action@v0.10
       - name: Download previously collected dataset
         continue-on-error: true
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: raw-dataset
       - name: Run crawler config checks
@@ -285,7 +285,7 @@ jobs:
         uses: fipl-hse/setup-env-action@v0.10
       - name: Download previously collected dataset
         continue-on-error: true
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: raw-dataset
       - name: Run CorpusManager tests
@@ -294,29 +294,6 @@ jobs:
           export PYTHONPATH=$(pwd):$PYTHONPATH
           python admin_utils/unpack_archived_dataset.py lab_6_pipeline
           bash config/_stage_run_pytest.sh "$PR_NAME" "$PR_AUTHOR" -l lab_6_pipeline -m stage_3_2_corpus_manager_checks
-
-  checking-conllu-token-works-correctly:
-    name: ConlluToken displays tokens
-    needs: [
-      milestone-2-pipeline
-    ]
-    env:
-      PR_AUTHOR: ${{ github.actor }}
-    runs-on: ubuntu-latest
-    timeout-minutes: 2
-
-    steps:
-      - uses: actions/checkout@v4
-      - name: Setup FIPL environment
-        uses: fipl-hse/setup-env-action@v0.10
-      - name: Download previously collected dataset
-        continue-on-error: true
-        uses: actions/download-artifact@v3
-        with:
-          name: raw-dataset
-      - name: Run Conllu tests
-        run: |
-          bash config/_stage_run_pytest.sh "$PR_NAME" "$PR_AUTHOR" -l lab_6_pipeline -m stage_3_3_conllu_token_checks
 
   checking-student-processing-works-for-admin-dataset:
     name: Pipe processed admin data
@@ -334,7 +311,7 @@ jobs:
         uses: fipl-hse/setup-env-action@v0.10
       - name: Download previously collected dataset
         continue-on-error: true
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: raw-dataset
       - name: Run metadata validation
@@ -361,7 +338,7 @@ jobs:
         uses: fipl-hse/setup-env-action@v0.10
       - name: Download previously collected dataset
         continue-on-error: true
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: raw-dataset
       - name: Run validation of `_processed.txt` files
@@ -369,7 +346,7 @@ jobs:
           bash admin_utils/stage_3_pipeline_tests/_stage_check_on_student_dataset.sh "$PR_AUTHOR"
       - name: Archive processed dataset
         continue-on-error: true
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: processed-dataset
           path: |
@@ -392,7 +369,7 @@ jobs:
         uses: fipl-hse/setup-env-action@v0.10
       - name: Download previously collected dataset
         continue-on-error: true
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: processed-dataset
       - name: Run validation of `_processed.txt` files
@@ -412,7 +389,6 @@ jobs:
       checking-student-processing-works-for-admin-dataset,
       checking-student-processing-works-for-student-dataset,
       checking-corpus-manager-creates-instances-correctly,
-      checking-conllu-token-works-correctly,
     ]
     env:
       PR_AUTHOR: ${{ github.actor }}
@@ -425,16 +401,15 @@ jobs:
         uses: fipl-hse/setup-env-action@v0.10
       - name: Download previously collected dataset
         continue-on-error: true
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: processed-dataset
       - name: Congratulations
         run: |
-          bash admin_utils/stage_5_pos_frequency_pipeline_tests/_stage_check_pos_pipeline.sh "$PR_AUTHOR"
           bash config/_stage_run_pytest.sh "$PR_NAME" "$PR_AUTHOR" -l lab_6_pipeline -m stage_4_pos_frequency_pipeline_checks
       - name: Archive processed dataset
         continue-on-error: true
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: processed-dataset
           path: |

@@ -92,7 +92,8 @@ exclude = [
     'venv*',
     'test.py',
     'tests/',
-    'tools/'
+    'tools/',
+    'admin_utils/stubs',
 ]
 
 disallow_untyped_defs = true
@@ -102,6 +103,8 @@ check_untyped_defs = true
 warn_return_any = true
 show_error_codes = true
 warn_unused_ignores = false
+
+mypy_path = "admin_utils/stubs"
 
 # simplifications
 disable_error_code = [
@@ -123,12 +126,6 @@ module = [
     'matplotlib.pyplot',
     'memory_profiler',
     'pydantic',
-    'pymorphy2',
-    'pymorphy2.tagset',
-    'pymystem3',
-    'spacy_udpipe',
-    'spacy_conll',
-    'stanza.*',
     'torch.*',
     'transformers',
 ]
@@ -168,15 +165,6 @@ disable_error_code = [
 
 [[tool.mypy.overrides]]
 module = [
-    'core_utils.udpipe.tools',
-]
-disable_error_code = [
-    'no-any-unimported',
-    'no-any-return',
-]
-
-[[tool.mypy.overrides]]
-module = [
     'core_utils.article.article',
     'core_utils.stanza_utils'
 ]
@@ -210,10 +198,6 @@ module = [
     '*.scrapper_stub',
     '*.pipeline',
     '*.pipeline_stub',
-    '*.pos_frequency_pipeline',
-    '*.pos_frequency_pipeline_stub',
-    '*.stanza_pipeline',
-    '*.stanza_pipeline_stub',
 ]
 disable_error_code = [
     'empty-body',
@@ -223,7 +207,7 @@ disable_error_code = [
 [[tool.mypy.overrides]]
 module = [
     'lab_5_scrapper.*',
-    'lab_6_pipeline.*',
+#    'lab_6_pipeline.*',
     'config.*',
 ]
 disable_error_code  = [

@@ -1,6 +1,7 @@
 """
 Utils for websites validation.
 """
+# pylint: disable=import-error
 import dataclasses
 import json
 from dataclasses import dataclass

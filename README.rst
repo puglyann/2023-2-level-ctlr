@@ -45,7 +45,7 @@ Project Timeline
    1. Short summary: Your code can automatically parse a media website
       you are going to choose, save texts and its metadata in a proper
       format.
-   2. Deadline: **TBD**.
+   2. Deadline: **April, 29**.
    3. Format: each student works in their own PR.
    4. Dataset volume: 5-7 articles.
    5. Design document: :ref:`scrapper-label`.
@@ -97,6 +97,11 @@ Lectures history
 | 22.04.2024 | Seminar:            | `Листинг <./seminars/seminar_04_22_2024/try_fs.py>`__.       |
 |            | filesystem with     | `Листинг <./seminars/seminar_04_22_2024/try_json.py>`__.     |
 |            | ``pathlib``, dates. | `Листинг <./seminars/seminar_04_22_2024/try_dates.py>`__.    |
++------------+---------------------+--------------------------------------------------------------+
+| 29.04.2024 | Introduction to lab | N/A                                                          |
+|            | 6. CoNLLU format.   |                                                              |
++------------+---------------------+--------------------------------------------------------------+
+| 29.04.2024 | Lab 5 handover.     | N/A                                                          |
 +------------+---------------------+--------------------------------------------------------------+
 
 You can find a more complete summary from lectures in :ref:`ctlr-lectures-label`.

@@ -51,8 +51,6 @@ def get_module_names() -> tuple[str, ...]:
         'service.py',
         'scrapper.py',
         'pipeline.py',
-        'pos_frequency_pipeline.py',
-        'stanza_pipeline.py',
     )
 
 
@@ -65,6 +63,9 @@ def main() -> None:
     code_is_equal = True
     for lab_path in labs_paths:
         print(f'Processing {lab_path}...')
+        if lab_path.name == 'core_utils':
+            print(f'\t\tIgnoring {lab_path} as it can\'t have stubs.')
+            continue
 
         for module_name in get_module_names():
             module_path = lab_path / module_name
