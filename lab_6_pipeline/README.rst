@@ -195,7 +195,18 @@ to check if you can get it.
 
 4. Desired mark **10**:
 
-   1. TBA
+   1. ``pylint`` level: ``10/10``.
+   2. All requirements for the mark **8**.
+   3. Pipeline uses ``networkx`` library to create a graph of
+      dependencies to search for a required syntactic pattern.
+   4. Pipeline collects required syntactic patterns in each text and
+      extends ``N_meta.json`` files with this information.
+
+      1. `Example raw text
+         <https://github.com/fipl-hse/2023-2-level-ctlr/blob/main/
+         lab_6_pipeline/tests/test_files/1_raw.txt>`__ and `Example meta info
+         <https://github.com/fipl-hse/2023-2-level-ctlr/blob/main/
+         lab_6_pipeline/tests/test_files/1_meta.json>`__
 
 Implementation tactics
 ----------------------
@@ -797,7 +808,7 @@ Once executed,
 3. Calculates frequencies of each part of speech via protected method
    :py:meth:`lab_6_pipeline.pipeline.POSFrequencyPipeline._count_frequencies`, which
    accepts article instance and returns the dictionary
-   in the format ``{<POS>}: <number of occurrences>``.
+   in the format ``{<POS>: <number of occurrences>}``.
 4. Writes them to the meta file via ``Article`` instance interface.
 5. Visualizes frequencies in a form of images with names following
    convention ``N_image.png`` via predefined function
@@ -825,3 +836,197 @@ Sample usage:
 .. code:: python
 
    visualize(article=article, path_to_save=ASSETS_PATH / '1_image.png')
+
+Stage 6. Extract syntactic patterns using graphs
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For a mark higher than 8, you are required to be able to perform
+searching for a certain pattern using
+information from ``.conllu`` files and the functionality of ``networkx`` library.
+
+See examples for a better understanding: `Raw text
+<https://github.com/fipl-hse/2023-2-level-ctlr/blob/main/
+lab_6_pipeline/tests/test_files/1_raw.txt>`__ - `Desired output
+<https://github.com/fipl-hse/2023-2-level-ctlr/blob/main/
+lab_6_pipeline/tests/test_files/1_meta.json>`__.
+
+To learn more about the ``networkx``,
+inspect `the official documentation of the library
+<https://networkx.org/documentation/stable/>`__.
+
+Stage 6.1. Introduce ``PatternSearchPipeline`` abstraction
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Now we are going to work with
+the :py:class:`lab_6_pipeline.pipeline.PatternSearchPipeline` class.
+During instantiation it must accept an instance of ``CorpusManager``,
+instance of ``StanzaAnalyzer`` and tuple of POS tags
+for required syntactic pattern.
+
+In this laboratory work we are interested in exploring
+verb control noun with preposition models, that is why there would be
+the following instantiation:
+
+.. code:: python
+
+   corpus_manager = CorpusManager(...)
+   stanza_analyzer = StanzaAnalyzer()
+   visualizer = PatternSearchPipeline(corpus_manager, stanza_analyzer, ("VERB", "NOUN", "ADP"))
+
+During instantiation, provided instances of ``CorpusManager`` and ``StanzaAnalyzer``
+are stored in the attributes ``_corpus``, ``_analyzer``. A tuple of POS tags
+is stored in the ``_node_labels`` attribute.
+
+Stage 6.1. Make syntactic graphs via ``PatternSearchPipeline`` abstraction
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In this laboratory work we are going to search for patterns
+using graphs of syntactic dependencies. This approach facilitates effortless
+scaling of pattern sizes, enabling the discovery of syntactic patterns
+of varying lengths and widths.
+
+.. note:: The idea of the graph of syntactic dependencies is based on the
+    `Dependency grammar <https://en.wikipedia.org/wiki/Dependency_grammar>`__.
+    It represents the structure of a sentence in the form of a hierarchy of components
+    between which dependency relationships are established.
+    Thus, sentence structure is considered in terms of
+    vertices (roots) and dependents (children).
+
+Before looking for a patterns, we have to create syntactic graph
+of each sentence in the article which we will subsequently search for.
+
+Example of the graph for the sentence: Я учусь в университете.
+
+   .. figure:: ../docs/images/sample_sentence_graph.png
+      :alt: sentence graph sample
+
+In order to make a graph of syntactic dependencies for each sentence in the article,
+you are required to implement a
+:py:meth:`lab_6_pipeline.pipeline.PatternSearchPipeline._make_graphs` method.
+
+The method accepts
+one instance of :py:class:`core_utils.pipeline.CoNLLUDocument` as an argument.
+It is presumed that the given document object
+contains information from ``conllu`` file
+which was obtained using :py:meth:`core_utils.pipeline.LibraryWrapper.from_conllu` method.
+
+The :py:meth:`lab_6_pipeline.pipeline.PatternSearchPipeline._make_graphs` method
+iterates through each sentence in the article and creates nodes and edges for the words
+in the sentence. Pass ``upos`` as ``label`` argument when creating node and
+``deprel`` as a ``label`` argument when creating edge.
+Edges should connect this word with its parent using dependency relation.
+
+.. tip:: To make a graph it is mandatory to use an instance of
+    `DiGraph <https://networkx.org/documentation/stable/reference/classes/digraph.html>`__ class.
+
+Stage 6.2. Find syntactic patterns via ``PatternSearchPipeline`` abstraction
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+After creating graphs of syntactic dependencies for each sentence in the article,
+we are ready to search for the required pattern in it.
+
+The key idea is the following: we have the dependency graph of our sentence
+and we want to make an ideal graph for our pattern.
+
+.. note:: Your implementation on creating an ideal graph
+    should be scalable, which means that it is not tied
+    to a specific syntactic pattern.
+
+Example of the ideal graph for our syntactic pattern:
+
+   .. figure:: ../docs/images/sample_ideal_graph.png
+      :alt: ideal graph sample
+
+After that, we are searching for the subgraphs in our graph
+which are isomorphic to the ideal graph which represents our syntactic pattern.
+
+.. note:: Isomorphic graphs are graphs that have the same structure,
+    meaning they have the same number of vertices (points) and edges (connections between points),
+    and these connections are arranged in the same way.
+    The simple example is two different maps of the same city
+    that show the same streets and intersections but might label them differently.
+
+After we have found all isomorphic graphs, we instantiate the `GraphMatcher
+<https://networkx.org/documentation/stable/reference/algorithms/isomorphism.vf2.html#graph-matcher>`__
+class. During instantiation it takes an isomorphic ideal graph and subgraph
+and an anonymous function to fill the ``node_match`` argument with the logic
+of comparing labels of these graphs. This way we can find all subgraphs which
+match with required POS tags of the syntactic pattern.
+
+However, it is not everything. Graphs are just a convenient way to
+search for a certain pattern. If we want to further analyze information
+about the received patterns or calculate some statistics we need to use
+a more traditional way of storing information.
+
+For these aims there are
+:py:class:`core_utils.pipeline.TreeNode` class.
+It stores information about the node of the tree.
+You have to instantiate it with the POS tag,
+text and list of dependent children of your node.
+
+To add all children to this list you have to implement a
+:py:meth:`lab_6_pipeline.pipeline.PatternSearchPipeline._add_children` method.
+It accepts the current graph - an instance of
+`DiGraph <https://networkx.org/documentation/stable/reference/classes/digraph.html>`__ class,
+a dictionary with matched subgraphs, ID of the root node and
+root node of the matched subgraph. It iterates through the available
+children of the accepted root node, instantiates :py:class:`core_utils.pipeline.TreeNode` class
+and appends information about the new children into root node.
+
+The method works recursively: until all the children of the current root node
+will not be found.
+
+.. note:: Recursion is a method where a function calls itself to solve a problem.
+        It's like a loop that repeats an action, but instead of using a traditional loop structure,
+        the function keeps calling itself with a modified parameter
+        until it reaches a condition that tells it to stop,
+        known as the base case.
+
+.. code:: python
+
+    # A classic example of recursion is calculating the factorial of a number
+
+    def calculate_factorial(number):
+        if number == 1: # Base case
+            return 1
+        else:
+            return number * calculate_factorial(number - 1) # Recursive case
+
+The :py:meth:`lab_6_pipeline.pipeline.PatternSearchPipeline._find_pattern` method
+returns a dictionary which as keys contains the indexes of sentences
+where the required pattern was found,
+and as values a list of :py:class:`core_utils.pipeline.TreeNode` class instances
+with information about the pattern matches.
+
+Stage 6.3. Implement core logic of ``PatternSearchPipeline``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. important:: **Stages 0-6.3** are required to get the **mark 10**.
+
+The :py:class:`lab_6_pipeline.pipeline.PatternSearchPipeline`
+is executed with the same interface method
+:py:meth:`lab_6_pipeline.pipeline.PatternSearchPipeline.run`
+that you need to implement.
+
+Once executed,
+:py:meth:`lab_6_pipeline.pipeline.PatternSearchPipeline.run`:
+
+1. Iterates through the available articles taken from
+   :py:class:`lab_6_pipeline.pipeline.CorpusManager`.
+2. Retrieves UD information for each article via ``StanzaAnalyzer`` interface
+   (notice any ``.conllu`` file type can be used).
+3. Makes graphs of syntactic dependencies for each article via protected method
+   :py:meth:`lab_6_pipeline.pipeline.PatternSearchPipeline._make_graphs`.
+4. Searches for the required pattern for each article via protected method
+   :py:meth:`lab_6_pipeline.pipeline.PatternSearchPipeline._find_pattern`.
+5. Writes them to the meta file via ``Article`` instance interface.
+
+.. note:: It is mandatory to get articles with the
+          :py:meth:`lab_6_pipeline.pipeline.CorpusManager.get_articles` method.
+
+.. note:: It is mandatory to use :py:meth:`core_utils.article.article.Article.get_file_path`,
+          :py:meth:`core_utils.article.article.Article.set_pos_info` method and
+          :py:func:`core_utils.article.io.to_meta` function.
+
+.. note:: Make sure that resulting meta files are valid: they must
+          contain no more than one dictionary-like object.

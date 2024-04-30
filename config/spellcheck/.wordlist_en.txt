@@ -51,6 +51,7 @@ against
 aggregating
 aim
 aimed
+aims
 alekseevna
 alexander
 all
@@ -81,6 +82,7 @@ andrei
 angle
 anim
 animacy
+anonymous
 annotation
 another
 answer
@@ -91,12 +93,15 @@ apart
 api
 apidoc
 appears
+appends
 applying
 appreciated
 approach
 appropriate
 appropriately
+april
 apro
+arranged
 are
 argparse
 args
@@ -193,10 +198,12 @@ change
 chart
 check
 child
+children
 choose
 chosen
 chromedrivermixin
 ci
+city
 class
 classdef
 classes
@@ -228,6 +235,7 @@ components
 compulsory
 compute
 computer
+condition
 config
 configdto
 configuration
@@ -247,7 +255,10 @@ conllutoken
 conllutokens
 conllutokentest
 conllutokentestminimal
+connect
+connections
 consider
+considered
 consistent
 constants
 constraints
@@ -263,6 +274,7 @@ continuity
 continuous
 contrast
 control
+convenient
 convention
 conventions
 conversion
@@ -328,6 +340,7 @@ dep
 dependencies
 dependency
 dependent
+dependents
 deprel
 deps
 derive
@@ -350,9 +363,11 @@ dictionary-like
 difference
 different
 differently
+digraph
 directory
 disable
 disables
+discovery
 discussed
 display
 displaying
@@ -384,7 +399,10 @@ dynamically
 each
 easily
 economics
+edge
+edges
 editing
+effortless
 egor
 either
 employed
@@ -393,6 +411,7 @@ emptydirectoryerror
 emptyfileerror
 emulate
 enables
+enabling
 encapsulate
 encapsulated
 encapsulates
@@ -414,6 +433,7 @@ equal
 equating
 errors
 especially
+established
 etc
 even
 eventually
@@ -441,6 +461,7 @@ explain
 explained
 explanation
 explanations
+exploring
 exposes
 expressions
 extend
@@ -454,6 +475,7 @@ extracted
 extracting
 extraction
 extracts
+facilitates
 fact
 fails
 false
@@ -536,6 +558,9 @@ going
 gorod
 got
 grammar
+graph
+graphmatcher
+graphs
 green
 grnd
 group
@@ -545,6 +570,7 @@ handing
 handle
 handled
 handles
+handover
 happen
 harder
 hardware
@@ -557,6 +583,7 @@ helpful
 hence
 here
 hidden
+hierarchy
 higher
 hint
 history
@@ -572,6 +599,7 @@ huge
 human
 id
 idea
+ideal
 identical
 identifier
 identify
@@ -610,6 +638,7 @@ incorrectseedurlerror
 incorrecttimeouterror
 incorrectverifyerror
 index
+indexes
 indicates
 inferior
 infn
@@ -635,6 +664,7 @@ install
 installation
 instance
 instances
+instantiate
 instantiated
 instantiates
 instantiating
@@ -650,11 +680,13 @@ intended
 intention
 interaction
 interchangeably
+interested
 interesting
 interests
 interface
 intermediate
 internal
+intersections
 intj
 into
 introduce
@@ -664,12 +696,14 @@ invalid
 io
 irina
 is
+isomorphic
 it
 iterable
 iterate
 iterates
 iterating
 its
+itself
 job
 joined
 json
@@ -677,6 +711,7 @@ just
 kashchikhin
 kazyulina
 keep
+keeps
 key
 key-value
 keys
@@ -688,6 +723,7 @@ knows
 kwargs
 lab
 label
+labels
 laboratory
 labsettings
 language
@@ -708,6 +744,7 @@ lemma
 lemmas
 lemmatization
 lemmatized
+lengths
 less
 let
 level
@@ -732,6 +769,7 @@ loct
 logic
 look
 looking
+loop
 lose
 low-level
 lower
@@ -743,6 +781,7 @@ macos
 made
 main
 make
+makes
 making
 managing
 mandatory
@@ -752,12 +791,15 @@ many
 map
 mapping
 mappings
+maps
 margarita
 marina
 mark
 marks
 markup
 match
+matched
+matches
 material
 materials
 may
@@ -783,10 +825,12 @@ mini-task
 misc
 mistake
 mitigated
+mkdir
 mode
 model
 models
 modifications
+modified
 module
 modulenotfounderror
 modules
@@ -818,6 +862,7 @@ naturally
 necessary
 need
 needed
+networkx
 new
 newline
 newly
@@ -829,6 +874,8 @@ nikolaevna
 nlp
 nn
 no
+node
+nodes
 nom
 nomn
 none
@@ -850,6 +897,7 @@ numr
 object
 objective
 obtain
+obtained
 obtaining
 occurrences
 of
@@ -924,6 +972,7 @@ patterns
 patternsearcher
 patternsearchertests
 patternsearchpipeline
+patternsearchpipelinetests
 per
 perform
 performance
@@ -981,6 +1030,7 @@ previously
 principle
 print
 private
+problem
 problems
 proceed
 proceeding
@@ -1046,8 +1096,10 @@ rd
 re
 re-implement
 reach
+reaches
 read
 reads
+ready
 real
 realize
 reason
@@ -1056,7 +1108,9 @@ received
 receives
 recently
 recommended
+recursion
 recursive
+recursively
 redefine
 reduced
 ref
@@ -1070,6 +1124,8 @@ regular
 reject
 relate
 related
+relation
+relationships
 relevant
 reliable
 rely
@@ -1079,6 +1135,7 @@ remove
 removes
 removing
 repeat
+repeats
 repetitions
 repository
 represent
@@ -1118,8 +1175,11 @@ review
 right
 risk
 risks
+rmdir
+rmtree
 robust
 root
+roots
 rst
 ru
 run
@@ -1135,6 +1195,8 @@ save
 saved
 saves
 saving
+scalable
+scaling
 scan
 school
 scientist
@@ -1150,6 +1212,7 @@ scroll
 scrolling
 search
 searches
+searching
 second
 secondary
 sections
@@ -1182,8 +1245,10 @@ several
 shifting
 short
 should
+show
 showed
 shown
+shutil
 similar
 similarly
 simple
@@ -1196,6 +1261,7 @@ sitecheckresult
 sitecheckstatus
 situation
 size
+sizes
 skills
 slight
 slips
@@ -1207,6 +1273,7 @@ so-called
 software
 solely
 solution
+solve
 some
 something
 source
@@ -1256,6 +1323,8 @@ stored
 stores
 storing
 str
+streets
+strftime
 string
 strings
 strptime
@@ -1266,6 +1335,7 @@ students
 studenttextadvancedpreprocesstest
 studenttextbasicpreprocesstest
 subgraph
+subgraphs
 submodules
 subprocess
 subsequently
@@ -1301,7 +1371,9 @@ tba
 tbd
 technical
 techniques
+tells
 term
+terms
 text
 textprocessingpipeline
 textprocessingpipelinescoreeightreferenceprocess
@@ -1328,6 +1400,7 @@ through
 throwing
 thrown
 thus
+tied
 time
 timeline
 timeout
@@ -1350,17 +1423,20 @@ topic
 topics
 total
 track
+traditional
 traffic
 transfer
 transform
 transformations
 translate
 transport
+tree
 treenode
 tricky
 true
 trust
 try
+tuple
 turn
 tutorial
 tutorials
@@ -1388,6 +1464,7 @@ unite
 universal
 university
 unkn
+unlink
 until
 up
 update
@@ -1420,6 +1497,7 @@ values
 variable
 various
 vary
+varying
 vasilisa
 venv
 verb
@@ -1428,6 +1506,7 @@ versa
 version
 versions
 vertical
+vertices
 very
 via
 vice
@@ -1474,6 +1553,7 @@ while
 whole
 why
 wide
+widths
 wikipedia
 will
 windows

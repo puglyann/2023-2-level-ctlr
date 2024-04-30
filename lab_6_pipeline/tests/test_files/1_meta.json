@@ -17,5 +17,26 @@
         "PROPN": 2,
         "CCONJ": 1,
         "NUM": 1,
-        "X": 1}
+        "X": 1},
+    "pattern_matches": {
+        "0": [
+            {
+                "upos": "VERB",
+                "text": "училась",
+                "children": [
+                    {
+                        "upos": "NOUN",
+                        "text": "адресу",
+                        "children": [
+                            {
+                                "upos": "ADP",
+                                "text": "по",
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
 }

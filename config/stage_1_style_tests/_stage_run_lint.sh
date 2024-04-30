@@ -10,7 +10,7 @@ configure_script
 
 FAILED=0
 
-lint_output=$(python -m pylint --exit-zero --rcfile config/stage_1_style_tests/.pylintrc config seminars admin_utils)
+lint_output=$(python -m pylint --exit-zero config seminars admin_utils)
 
 python config/stage_1_style_tests/lint_level.py \
   --lint-output "${lint_output}" \
@@ -20,7 +20,7 @@ check_if_failed
 
 if [ -d "core_utils" ]; then
   echo "core_utils exist"
-  lint_output=$(python -m pylint --exit-zero --rcfile config/stage_1_style_tests/.pylintrc core_utils)
+  lint_output=$(python -m pylint core_utils)
 
   python config/stage_1_style_tests/lint_level.py \
     --lint-output "${lint_output}" \
@@ -46,7 +46,7 @@ for LAB_NAME in $LABS; do
     IGNORE_OPTION="--ignore ${LAB_NAME}/tests"
   fi
 
-  lint_output=$(python -m pylint --exit-zero --rcfile config/stage_1_style_tests/.pylintrc ${LAB_NAME} ${IGNORE_OPTION})
+  lint_output=$(python -m pylint --exit-zero ${LAB_NAME} ${IGNORE_OPTION})
 
   python config/stage_1_style_tests/lint_level.py \
     --lint-output "${lint_output}" \
