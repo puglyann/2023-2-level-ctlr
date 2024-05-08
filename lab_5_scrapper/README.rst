@@ -261,7 +261,7 @@ configuration. When config is invalid:
    -  ``NumberOfArticlesOutOfRangeError``: total number of articles is
       out of range from 1 to 150;
    -  ``IncorrectNumberOfArticlesError``: total number of articles to
-      parse is not integer;
+      parse is not integer or less than 0;
    -  ``IncorrectHeadersError``: headers are not in a form of
       dictionary;
    -  ``IncorrectEncodingError``: encoding must be specified as a

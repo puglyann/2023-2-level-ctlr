@@ -290,7 +290,7 @@ jobs:
           name: raw-dataset
       - name: Run CorpusManager tests
         run: |
-          source venv/bin/activate  
+          source venv/bin/activate
           export PYTHONPATH=$(pwd):$PYTHONPATH
           python admin_utils/unpack_archived_dataset.py lab_6_pipeline
           bash config/_stage_run_pytest.sh "$PR_NAME" "$PR_AUTHOR" -l lab_6_pipeline -m stage_3_2_corpus_manager_checks
@@ -374,13 +374,10 @@ jobs:
           name: processed-dataset
       - name: Run validation of `_processed.txt` files
         run: |
-          source venv/bin/activate  
+          source venv/bin/activate
           export PYTHONPATH=$(pwd):$PYTHONPATH
           python admin_utils/unpack_archived_dataset.py lab_6_pipeline
           bash config/_stage_run_pytest.sh "$PR_NAME" "$PR_AUTHOR" -l lab_6_pipeline -m stage_3_5_student_dataset_validation
-      - name: Run validation of `.conllu` files
-        run: |
-          bash admin_utils/stage_3_pipeline_tests/_stage_check_student_conllu_validation.sh
 
   running-pos-pipeline-tests:
     name: POSFrequencyPipeline tests

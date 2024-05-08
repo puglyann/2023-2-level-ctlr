@@ -24,9 +24,10 @@ have collected from your website.
 :py:class:`core_utils.article.article.Article` abstraction.
 
 :py:class:`core_utils.article.article.Article` class is responsible
-for storing article raw, meta and ``conllu`` data and working with it.
-During the implementation of Lab 5 and Lab 6, you should use the methods of this class,
-so we advise you to study them.
+for storing article raw, meta and ``.conllu`` data and working with it.
+During the implementation of Lab 5 and Lab 6, you should use the methods of this class.
+The lab descriptions will contain hints on when to use one or another class method,
+but we advise you to study all the methods: they may be useful to you.
 
 .. note:: Do not forget to create a new instance of the
           :py:class:`core_utils.article.article.Article` class to use its methods.
@@ -39,7 +40,7 @@ In addition to the ``Article`` class, the module has:
    extracts the article id from its path.
 3. :py:class:`core_utils.article.article.ArtifactType` abstraction which provides
    types of artifacts that can be created by text processing pipelines, such as ``CLEANED``,
-   ``MORPHOLOGICAL_CONLLU``, ``POS_CONLLU`` and ``FULL_CONLLU``.
+   ``UDPIPE_CONLLU``, and ``STANZA_CONLLU``.
 
 The description of each artifact you can find in :ref:`dataset-label`.
 
@@ -69,7 +70,7 @@ Lab_6
 -  :py:func:`core_utils.article.io.to_cleaned` - use to save cleaned texts
    of each article, i.e. lowercased texts with no punctuation;
 -  :py:func:`core_utils.article.io.to_meta` - use to save POS information
-   about each article;
+   and required syntactic patterns from each article;
 -  :py:func:`core_utils.article.io.from_meta` - use to load
    meta-information about each article and create the
    :py:class:`core_utils.article.article.Article` abstraction;

@@ -95,6 +95,7 @@ class Article:
         self.pos_frequencies = {}
         self._conllu_sentences = []
         self.pattern_matches = {}
+        self._conllu_info = ''
 
     def set_pos_info(self, pos_freq: dict) -> None:
         """

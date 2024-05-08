@@ -12,7 +12,7 @@ from config.constants import PROJECT_CONFIG_PATH, PROJECT_ROOT
 from config.lab_settings import LabSettings
 from config.project_config import ProjectConfig
 
-CoverageResults = Mapping[str, Optional[int]]
+CoverageResults = Mapping[str, tuple[Optional[int], bool]]
 
 
 def collect_coverage(all_labs_names: Iterable[Path],
@@ -30,22 +30,24 @@ def collect_coverage(all_labs_names: Iterable[Path],
     all_labs_results = {}
     for lab_path in all_labs_names:
         percentage = None
+        has_fallen_tests = False
         try:
             if lab_path.name == 'core_utils':
                 check_target = False
             else:
                 check_target = True
-            percentage = run_coverage_collection(lab_path=lab_path, artifacts_path=artifacts_path,
-                                                 check_target_score=check_target)
+            percentage, has_fallen_tests = run_coverage_collection(lab_path=lab_path,
+                                                                   artifacts_path=artifacts_path,
+                                                                   check_target_score=check_target)
         except (CoverageRunError, CoverageCreateReportError) as e:
             print(e)
         finally:
-            all_labs_results[lab_path.name] = percentage
+            all_labs_results[lab_path.name] = (percentage, has_fallen_tests)
     return all_labs_results
 
 
 def is_decrease_present(all_labs_results: CoverageResults,
-                        previous_coverage_results: dict) -> tuple[bool, dict]:
+                        previous_coverage_results: dict) -> tuple[bool, bool, dict]:
     """
     Analyze coverage report versus previous runs.
 
@@ -54,14 +56,18 @@ def is_decrease_present(all_labs_results: CoverageResults,
         previous_coverage_results (dict): Previous coverage results
 
     Returns:
-        tuple[bool, dict]: Is decrease present or not
+        tuple[bool, bool, dict]: Is decrease present or not, and failed tests present or not
     """
     print('\n\n' + '------' * 3)
     print('REPORT')
     print('------' * 3)
     any_degradation = False
+    any_fallen_tests = False
     labs_with_thresholds = {}
-    for lab_name, current_lab_percentage in all_labs_results.items():
+    for lab_name, current_lab_args in all_labs_results.items():
+        if current_lab_args[1]:
+            any_fallen_tests = True
+        current_lab_percentage = current_lab_args[0]
         prev_lab_percentage = previous_coverage_results.get(lab_name, 0)
         if current_lab_percentage is None:
             current_lab_percentage = 0
@@ -75,7 +81,7 @@ def is_decrease_present(all_labs_results: CoverageResults,
     print('END OF REPORT')
     print('------' * 3 + '\n\n')
 
-    return any_degradation, labs_with_thresholds
+    return any_degradation, any_fallen_tests, labs_with_thresholds
 
 
 def main() -> None:
@@ -88,19 +94,20 @@ def main() -> None:
     project_config = ProjectConfig(PROJECT_CONFIG_PATH)
     coverage_thresholds = project_config.get_thresholds()
 
-    all_labs_names = project_config.get_labs_paths(include_addons=False)
+    all_labs_names = project_config.get_labs_paths(include_addons=True)
 
     not_skipped = []
     for lab_path in all_labs_names:
-        settings = LabSettings(lab_path / 'settings.json')
-        if settings.target_score == 0:
-            print(f'Skip {lab_path} as target score is 0')
-            continue
+        if 'core_utils' not in lab_path.name:
+            settings = LabSettings(lab_path / 'settings.json')
+            if settings.target_score == 0:
+                print(f'Skip {lab_path} as target score is 0')
+                continue
         not_skipped.append(lab_path)
 
     all_labs_results = collect_coverage(not_skipped, artifacts_path)
 
-    any_degradation, labs_with_thresholds = \
+    any_degradation, any_fallen_tests, labs_with_thresholds = \
         is_decrease_present(all_labs_results, coverage_thresholds)
 
     if any_degradation:
@@ -111,6 +118,11 @@ def main() -> None:
         project_config.update_thresholds(labs_with_thresholds)
 
         print(project_config.get_json())
+        sys.exit(1)
+
+    if any_fallen_tests:
+        print("Some tests failed! We can't accept that.\n"
+              "Make sure the tests pass. I wish you good luck! \n\n")
         sys.exit(1)
 
     print('Nice coverage. Anyway, write more tests!', end='\n\n')

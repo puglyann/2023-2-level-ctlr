@@ -55,7 +55,7 @@ Project Timeline
    1. Short summary: Your code can automatically process raw texts from
       previous step, make point-of-speech tagging and basic
       morphological analysis.
-   2. Deadline: **TBD**.
+   2. Deadline: **May, 27**.
    3. Format: each student works in their own PR.
    4. Dataset volume: 5-7 articles.
    5. Design document: :ref:`pipeline-label`.
@@ -134,13 +134,17 @@ Technical solution
 | ``json``              | working with json text    | scrapper,    | 4       |
 |                       | format                    | pipeline     |         |
 +-----------------------+---------------------------+--------------+---------+
-| `pymystem3 <https://  | module for morphological  | pipeline     | 6       |
-| pypi.org/project      | analysis                  |              |         |
-| /pymystem3/>`__       |                           |              |         |
+| `spacy_udpipe <https: | module for morphological  | pipeline     | 6       |
+| //pypi.org/project    | analysis                  |              |         |
+| /spacy-udpipe/>`__    |                           |              |         |
 +-----------------------+---------------------------+--------------+---------+
-| `pymorphy2 <https://p | module for morphological  | pipeline     | 10      |
+| `stanza <https://p    | module for morphological  | pipeline     | 8       |
 | ypi.org/project       | analysis                  |              |         |
-| /pymorphy2/>`__       |                           |              |         |
+| /stanza/>`__          |                           |              |         |
++-----------------------+---------------------------+--------------+---------+
+| `networkx <https:/    | working with graphs       | pipeline     | 10      |
+| /pypi.org/project     |                           |              |         |
+| /networkx/>`__        |                           |              |         |
 +-----------------------+---------------------------+--------------+---------+
 
 Software solution is built on top of three components:
@@ -186,7 +190,7 @@ are satisfied:**
 
    1. Example: ``Scrapper, Irina Novikova - 20FPL2``.
 
-2. Has a filled file ``target_score.txt`` with an expected mark.
+2. Has a filled file ``settings.json`` with an expected mark.
    Acceptable values: 4, 6, 8, 10.
 3. Has green status.
 4. Has a label ``done``, set by mentor.

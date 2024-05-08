@@ -19,19 +19,6 @@ The ``article`` package is responsible for handling the articles you
 have collected from your website. You are going to use it for both
 Lab 5 and Lab 6. See exhaustive guide for :ref:`ctlr-article-label`.
 
-Tools package
--------------
-
-This package contains ``ud_validator.py`` module.
-It is responsible for verifying that the generated CoNLL-U files match the
-format. For more details on the CoNLL-U format, refer to :ref:`ud-format-label`.
-
-As a part of Lab 6, you are to perform a morphological analysis of the
-collected articles. Results must be saved as a CoNLL-U file.
-The correctness of the file format can be verified via `script prepared for you
-<https://github.com/fipl-hse/2023-2-level-ctlr/blob/main/core_utils/tools/ud_validator/validate.py>`__.
-To learn how to use it, refer to the :ref:`ud-format-label`.
-
 Configurations DTO
 ------------------
 
@@ -55,8 +42,13 @@ Module with constants
    which the root of the current project;
 -  ``ASSETS_PATH``: a path to ``2023-2-level-ctlr/tmp/article`` folder,
    where all the collected articles must be stored;
--  ``CRAWLER_CONFIG_PATH``: a path to the ``lab_5_scrapper/scrapper_config.json``
+-  ``CRAWLER_CONFIG_PATH``: a path to ``lab_5_scrapper/scrapper_config.json``
    file with configuration parameters for scrapper;
+-  ``PROJECT_CONFIG_PATH``: a path to ``2023-2-level-ctlr`` folder
+   configuration file (*this is an admin utils related item and
+   is not intended for you to interact with it*);
+-  ``UTILS_DIR``: a path to ``2023-2-level-ctlr/core_utils`` folder;
+-  ``UDPIPE_MODEL_PATH``: a path to the required UDPipe model;
 -  ``NUM_ARTICLES_UPPER_LIMIT``: a maximum number for articles to be
    collected, anything above this number must be considered invalid;
 -  ``TIMEOUT_LOWER_LIMIT``: a minimum number of seconds for a timeout,
@@ -64,30 +56,67 @@ Module with constants
 -  ``TIMEOUT_UPPER_LIMIT``: a maximum number of seconds for a timeout,
    anything above this number must be considered invalid.
 
-.. note:: Can you tell why the folder for articles is located in the
-          directory with the name ``tmp``?
+.. attention:: Can you tell why the folder for articles is located in the
+               directory with the name ``tmp``?
 
 .. note:: Make sure to import these constants from the ``constants.py`` module
           and use them whenever you need to specify a path or boundary values
           (for example, when validating configuration values).
 
+Pipeline module
+---------------
+
+The ``pipeline.py`` module defines the supporting abstractions for working on Lab 6.
+You may notice that most of the abstractions are protocols.
+The **protocol** is a set of methods or attributes that an object must have
+in order to be considered compatible with that protocol.
+It influences the code implicitly and, if necessary, organizes a check
+for the presence of methods or attributes in the corresponding classes.
+
+:py:class:`core_utils.pipeline.AbstractCoNLLUAnalyzer` protocol unites all the different
+types of analyzer instances used, UDPipe and Stanza models. It does not impose a special interface
+but simply indicates that this object is responsible for analyzing the language material.
+
+:py:class:`core_utils.pipeline.StanzaDocument` and :py:class:`core_utils.pipeline.CoNLLUDocument`
+protocols are utility classes that mimic Stanza and UDPipe documents respectively.
+Linguistic data retrieval models process texts and return
+CoNLL-U formatted markup as instances of :py:class:`core_utils.pipeline.StanzaDocument`.
+At the same time :py:class:`core_utils.pipeline.CoNLLUDocument`
+object contains information from ``.conllu`` file.
+
+:py:class:`core_utils.pipeline.LibraryWrapper` defines a specific set of methods and attributes
+to be present across all model wrappers:
+
+-  ``_analyzer`` attribute
+-  ``_bootstrap`` method
+-  ``analyze`` method
+-  ``to_conllu`` method
+
+:py:class:`core_utils.pipeline.PipelineProtocol` defines an interface for pipelines:
+they must have a ``run`` method.
+
+Dataclass :py:class:`core_utils.pipeline.TreeNode` stores information about
+the node of syntactic tree:
+
+-  POS tag
+-  text
+-  dependent children
+
 Visualizer module
 -----------------
 
-As a final part of Lab 6, students are expected to perform an
+As one of the tasks for mark 8 you are expected to perform an
 analysis of distribution of part-of-speech tags in the processed
 collected articles. This is where ``visualizer.py`` module comes into play.
 Its :py:func:`core_utils.visualizer.visualize` function takes an
-``Article`` instance along with a path and creates a graph depicting
+``Article`` instance along with a path and creates a bar chart depicting
 POS distribution in the specified location.
-
-Before calling it, make sure you have already filled the
-``pos_frequencies`` field of the corresponding meta file during
-``POSFrequencyPipeline`` execution.
 
 .. note:: :py:func:`core_utils.visualizer.visualize` function must be called
           during the execution of
-          :py:meth:`lab_6_pipeline.pipeline.POSFrequencyPipeline.run` method.
+          :py:meth:`lab_6_pipeline.pipeline.POSFrequencyPipeline.run` method,
+          but before that, make sure you have already filled the
+          ``pos_frequencies`` field of the corresponding meta file.
 
 .. note:: The name of the resulting image must have the same id as
           the article analysed.

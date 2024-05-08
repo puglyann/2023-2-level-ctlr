@@ -116,8 +116,8 @@ class ArticleTest(unittest.TestCase):
         self.assertIsInstance(self.article.pos_frequencies, dict, error_msg)
 
         error_msg = 'Check Article constructor: field "_conllu_sentences"' \
-                    'is supposed to be a list'
-        self.assertIsInstance(self.article.get_conllu_info(), list, error_msg)
+                    'is supposed to be a string'
+        self.assertIsInstance(self.article.get_conllu_info(), str, error_msg)
 
     @pytest.mark.core_utils
     def test_article_get_raw_text_return_str(self) -> None:

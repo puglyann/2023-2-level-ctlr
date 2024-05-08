@@ -28,7 +28,7 @@
       "upos": "NOUN",
       "feats": "Animacy=Anim|Case=Nom|Gender=Fem|Number=Sing",
       "head": 1,
-      "deprel": "parataxis",
+      "deprel": "nsubj",
       "start_char": 11,
       "end_char": 15
     },
@@ -39,6 +39,7 @@
       "upos": "ADV",
       "feats": "Degree=Pos",
       "head": 1,
+      "misc": "SpaceAfter=No",
       "deprel": "advmod",
       "start_char": 16,
       "end_char": 23
@@ -176,7 +177,7 @@
       "lemma": "почта",
       "upos": "NOUN",
       "feats": "Animacy=Inan|Case=Ins|Gender=Fem|Number=Sing",
-      "head": 15,
+      "head": 12,
       "deprel": "nmod",
       "start_char": 74,
       "end_char": 80
@@ -199,6 +200,7 @@
       "upos": "PUNCT",
       "head": 1,
       "deprel": "punct",
+      "misc": "SpaceAfter=No",
       "start_char": 86,
       "end_char": 87
     }

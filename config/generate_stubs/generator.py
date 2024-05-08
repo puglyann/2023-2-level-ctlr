@@ -70,33 +70,18 @@ def cleanup_code(source_code_path: Path) -> str:
 
     accepted_modules: dict[str, list[str]] = {
         'typing': ['*'],
-        'torch.utils.data': ['Dataset'],
-        'lab_3_generate_by_ngrams.main': ['*'],
-        'core_utils.llm.time_decorator': ['report_time'],
+        'pathlib': ['Path']
     }
 
-    if source_code_path.name not in ('start.py', 'service.py'):
-        accepted_modules['pathlib'] = ['Path']
-        accepted_modules['torch'] = ['']
-        accepted_modules['pandas'] = ['DataFrame']
-        accepted_modules['core_utils.llm.llm_pipeline'] = ['AbstractLLMPipeline']
-        accepted_modules['core_utils.llm.metrics'] = ['Metrics']
-        accepted_modules['core_utils.llm.raw_data_importer'] = ['AbstractRawDataImporter']
-        accepted_modules['core_utils.llm.raw_data_preprocessor'] = ['AbstractRawDataPreprocessor']
-        accepted_modules['core_utils.llm.task_evaluator'] = ['AbstractTaskEvaluator']
-
-    if 'reference_lab' in source_code_path.parent.name:
-        accepted_modules['config.lab_settings'] = ['InferenceParams']
-
-    if source_code_path.name == 'start.py' and 'llm' in source_code_path.parent.name:
-        accepted_modules.pop('typing')
-
-    if source_code_path.name == 'main.py' and 'reference_lab' in source_code_path.parent.name:
-        accepted_modules.pop('pandas')
-
-    if source_code_path.name == 'service.py':
-        accepted_modules['fastapi'] = ['FastAPI']
-        accepted_modules['lab_7_llm.main'] = ['LLMPipeline']
+    if source_code_path.name == 'pipeline.py':
+        accepted_modules['networkx'] = ['DiGraph']
+        accepted_modules['core_utils.pipeline'] = ['PipelineProtocol',
+                                                   'LibraryWrapper',
+                                                   'AbstractCoNLLUAnalyzer',
+                                                   'StanzaDocument',
+                                                   'CoNLLUDocument',
+                                                   'TreeNode']
+        accepted_modules['core_utils.article.article'] = ['Article']
 
     new_decl: list[stmt] = []
 

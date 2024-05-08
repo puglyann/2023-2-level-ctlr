@@ -16,7 +16,7 @@ def scrapper_setup() -> None:
     """
     Set up TEST_PATH for scrapper tests.
     """
-    if ASSETS_PATH.exists():
+    if any(ASSETS_PATH.iterdir()):
         copy_student_data()
     else:
         config = Config(CRAWLER_CONFIG_PATH)

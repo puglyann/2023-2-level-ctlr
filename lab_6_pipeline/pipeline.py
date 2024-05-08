@@ -4,6 +4,16 @@ Pipeline for CONLL-U formatting.
 # pylint: disable=too-few-public-methods, unused-import, undefined-variable, too-many-nested-blocks
 import pathlib
 
+try:
+    from networkx import DiGraph
+except ImportError:  # pragma: no cover
+    DiGraph = None  # type: ignore
+    print('No libraries installed. Failed to import.')
+
+from core_utils.article.article import Article
+from core_utils.pipeline import (AbstractCoNLLUAnalyzer, CoNLLUDocument, LibraryWrapper,
+                                 PipelineProtocol, StanzaDocument, TreeNode)
+
 
 class CorpusManager:
     """

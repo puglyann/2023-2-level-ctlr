@@ -7,6 +7,9 @@ For effective analysis of the collected articles, it is necessary to
 organize the data in a consistent way. The description of the structure
 and each of the elements of the dataset is provided below.
 
+.. contents:: Content:
+   :depth: 2
+
 Structure
 ---------
 
@@ -17,26 +20,29 @@ Structure
            +-- articles
                +-- articles
                    +-- 1_raw.txt <- the raw text of the article with the ID as the name
-                   +-- 1_cleaned.txt <- lowercased text with no punctuation
-                   +-- 1_pos_conllu.conllu <- UD text format with POS tags
-                   +-- 1_morphological_conllu.conllu <- UD text format with morphological tags
                    +-- 1_meta.json <- the meta-information of the article
+                   +-- 1_cleaned.txt <- lowercased text with no punctuation
+                   +-- 1_udpipe_conllu.conllu <- processed text in the UD format (by UDPipe model)
+                   +-- 1_stanza_conllu.conllu <- processed text in the UD format (by Stanza model)
+                   +-- 1_image.png <- POS frequencies bar chart
                    +-- 2_raw.txt
-                   +-- 2_cleaned.txt
-                   +-- 2_pos_conllu.conllu <- UD text format with POS tags
-                   +-- 2_morphological_conllu.conllu
                    +-- 2_meta.json
+                   +-- 2_cleaned.txt
+                   +-- 2_udpipe_conllu.conllu
+                   +-- 2_stanza_conllu.conllu
+                   +-- 2_image.png
                    +-- ...
                    +-- 100_raw.txt
-                   +-- 100_cleaned.txt
-                   +-- 100_pos_conllu.conllu <- UD text format with POS tags
-                   +-- 100_morphological_conllu.conllu
                    +-- 100_meta.json
+                   +-- 100_cleaned.txt
+                   +-- 100_udpipe_conllu.conllu
+                   +-- 100_stanza_conllu.conllu
+                   +-- 100_image.png
 
 Raw texts
 ---------
 
-Raw articles texts are stored in ``X_raw.txt`` files where ``X``
+Raw articles texts are stored in ``N_raw.txt`` files where ``N``
 corresponds to the index of the article. The text is not preprocessed in
 any way.
 
@@ -44,23 +50,21 @@ Example:
 
 .. code:: text
 
-   Жители Китая, у которых дома живут три кошки, сняли на видео развлечение, которое придумали
-   питомицы. При этом главным реквизитом игры стала, как ни странно, рисоварка. Хотя на первый
-   взгляд сложно представить, что же могло заинтересовать животных в обычном кухонном агрегате.
-   Оказывается, пузырьки, которые то и дело возникают на крышке рисоварки. Эти пузырьки крайне
-   занимательно прихлопывать лапами.
+   Красивая - мама красиво, училась в ПДД и ЖКУ по адресу Львовская 10 лет с почтой test .
 
 Processed texts
 ---------------
 
-Ideally, the dataset consists of three processed texts examples: cleaned
-text, text with morphology annotation and text with syntactic
-annotation.
+Ideally, the dataset consists of three processed texts examples:
+
+-  cleaned text
+-  morphological and syntactic annotation from UDPipe model
+-  morphological and syntactic annotation from Stanza model
 
 Cleaned text
 ~~~~~~~~~~~~
 
-Cleaned texts are stored in ``X_cleaned.txt`` files where ``X``
+Cleaned texts are stored in ``N_cleaned.txt`` files where ``N``
 corresponds to the index of the article.
 
 Cleaned text is lowercased and does not include any punctuation.
@@ -70,94 +74,43 @@ Example:
 
 .. code:: text
 
-   жители китая у которых дома живут три кошки сняли на видео развлечение которое придумали питомицы
-   при этом главным реквизитом игры стала как ни странно рисоварка хотя на первый взгляд сложно
-   представить что же могло заинтересовать животных в обычном кухонном агрегате оказывается пузырьки
-   которые то и дело возникают на крышке рисоварки эти пузырьки крайне занимательно прихлопывать лапами
+   красивая мама красиво училась в пдд и жку по адресу львовская 10 лет с почтой test
 
-POS annotation
-~~~~~~~~~~~~~~
+Morphological and syntactic annotation from UDPipe and Stanza models
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Texts with POS annotation are stored in ``X_pos_conllu.conllu`` files
-where ``X`` corresponds to the index of the article.
-
-The files contain the following information about the tags: ``ID``,
-``FORM``, ``LEMMA``, ``UPOS``, ``XPOS``.
-Read more about the structure of such files in :ref:`ud-format-label`.
-
-Example for the first sentence of the sample article:
-
-.. code:: text
-
-   # sent_id = 0
-   # text = Жители Китая, у которых дома живут три кошки, сняли на видео развлечение,
-   которое придумали питомицы.
-   1   Жители  житель  NOUN    _   _   0   root    _   _
-   2   Китая   китай   NOUN    _   _   0   root    _   _
-   3   у   у   ADP _   _   0   root    _   _
-   4   которых который ADJ _   _   0   root    _   _
-   5   дома    дома    ADV _   _   0   root    _   _
-   6   живут   жить    VERB    _   _   0   root    _   _
-   7   три три NUM _   _   0   root    _   _
-   8   кошки   кошка   NOUN    _   _   0   root    _   _
-   9   сняли   снимать VERB    _   _   0   root    _   _
-   10  на  на  ADP _   _   0   root    _   _
-   11  видео   видео   NOUN    _   _   0   root    _   _
-   12  развлечение развлечение NOUN    _   _   0   root    _   _
-   13  которое который ADJ _   _   0   root    _   _
-   14  придумали   придумывать VERB    _   _   0   root    _   _
-   15  питомицы    питомица    NOUN    _   _   0   root    _   _
-   16  .   .   PUNCT   _   _   0   root    _   _
-
-Morphological annotation
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-Texts with morphological annotation are stored in
-``X_morphological_conllu.conllu`` files where ``X`` corresponds to the
-index of the article.
+Texts with morphological and syntactic annotation
+from UDPipe and Stanza models are stored in ``N_udpipe_conllu.conllu``
+and ``N_stanza_conllu.conllu`` files respectively
+where ``N`` corresponds to the index of the article.
 
 The files contain the following information about the tags: ``ID``,
-``FORM``, ``LEMMA``, ``UPOS``, ``XPOS``, ``FEATS``.
-Read more about the structure of such files in :ref:`ud-format-label`.
+``FORM``, ``LEMMA``, ``UPOS``, ``XPOS``, ``FEATS``, ``HEAD``, ``DEPREL``,
+``DEPS``, and ``MISC``.
 
-Example for the first sentence of the sample article:
-
-.. code:: text
-
-   # sent_id = 0
-   # text = Жители Китая, у которых дома живут три кошки, сняли на видео развлечение,
-   которое придумали питомицы.
-   1   Жители  житель  NOUN    _   Animacy=Anim|Case=Nom|Gender=Masc|Number=Plur   0   root    _   _
-   2   Китая   китай   NOUN    _   Animacy=Inan|Case=Gen|Gender=Masc|Number=Sing   0   root    _   _
-   3   у   у   ADP _   _   0   root    _   _
-   4   которых который ADJ _   Case=Ins|Number=Plur    0   root    _   _
-   5   дома    дома    ADV _   _   0   root    _   _
-   6   живут   жить    VERB    _   Number=Plur 0   root    _   _
-   7   три три NUM _   Case=Nom    0   root    _   _
-   8   кошки   кошка   NOUN    _   Animacy=Anim|Case=Gen|Gender=Fem|Number=Sing    0   root    _   _
-   9   сняли   снимать VERB    _   Number=Plur|Tense=Past  0   root    _   _
-   10  на  на  ADP _   _   0   root    _   _
-   11  видео   видео   NOUN    _   Animacy=Inan|Case=Ins|Gender=Neut|Number=Plur   0   root    _   _
-   12  развлечение развлечение NOUN   _  Animacy=Inan|Case=Acc|Gender=Neut|Number=Sing  0  root   _  _
-   13  которое который ADJ _   Case=Acc|Gender=Neut|Number=Sing    0   root    _   _
-   14  придумали   придумывать VERB    _   Number=Plur|Tense=Past  0   root    _   _
-   15  питомицы    питомица    NOUN   _  Animacy=Anim|Case=Gen|Gender=Fem|Number=Sing   0  root   _  _
-   16  .   .   PUNCT   _   _   15  punct   _   _
+.. attention:: Read more about the structure of such files
+               in :ref:`ud-format-label` and look at the example files
+               for `UDPipe model <https://github.com/fipl-hse/2023-2-level-ctlr/
+               blob/main/lab_6_pipeline/tests/test_files/reference_score_six_test.conllu>`__
+               and `Stanza model <https://github.com/fipl-hse/2023-2-level-ctlr/
+               blob/main/lab_6_pipeline/tests/test_files/reference_score_eight_test.conllu>`__.
 
 Meta information
 ----------------
 
-Meta information is stored in files with ``X_meta.json`` names where
-``X`` corresponds to the index of the article.
+Meta information is stored in files with ``N_meta.json`` names where
+``N`` corresponds to the index of the article.
 
 Meta-information includes:
 
-1. Article id (a positive integer, it must match the id of the file)
-2. Article title (a string)
-3. Article date (a string)
-4. Article URL (a string)
-5. Article topics (a list of strings)
-6. Article author (a list of strings)
+1. Article id (it must match the id of the file)
+2. Article URL
+3. Article title
+4. Article date
+5. Article author
+6. Article topics
+7. Article POS frequencies (Lab 6 for mark 8)
+8. Article pattern matches (Lab 6 for mark 10)
 
 Example:
 
@@ -174,7 +127,8 @@ Example:
        "topics": [
            "Стиль и красота"
        ],
-       "pos_frequencies": {}
+       "pos_frequencies": {},
+       "pattern_matches": {}
    }
 
 Volume

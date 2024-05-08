@@ -82,8 +82,8 @@ andrei
 angle
 anim
 animacy
-anonymous
 annotation
+anonymous
 another
 answer
 anum
@@ -101,13 +101,13 @@ appropriate
 appropriately
 april
 apro
-arranged
 are
 argparse
 args
 argument
 argumentparser
 arguments
+arranged
 article
 articleinstancecreationadvancedtest
 articleinstancecreationbasictest
@@ -315,6 +315,7 @@ ctlr-lectures-label
 ctlr-tests-label
 current
 data
+dataclass
 dataset
 dataset-label
 date
@@ -850,8 +851,6 @@ mozilla
 much
 multiple
 must
-mystem
-mystemtagconverter
 name
 named
 names
@@ -985,6 +984,7 @@ pick
 pipeline
 pipeline-label
 pipelinepathcheck
+pipelineprotocol
 pipelines
 place
 placed
@@ -1075,8 +1075,6 @@ pycharm
 pydocstyle
 pydoctest
 pylint
-pymorphy
-pymystem
 pypi
 pyproject
 pytest
