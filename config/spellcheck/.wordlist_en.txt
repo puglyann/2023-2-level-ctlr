@@ -1010,6 +1010,7 @@ powershell
 pr
 practice
 prcl
+pre
 pred
 predefined
 prepare
@@ -1338,6 +1339,7 @@ submodules
 subprocess
 subsequently
 substring
+subtype
 such
 suffix
 summary
@@ -1346,6 +1348,7 @@ sure
 surname
 suspicious
 syntactic
+syntagrus
 syntaxanalysispipeline
 sys
 system
@@ -1429,6 +1432,8 @@ transformations
 translate
 transport
 tree
+treebank
+treebanks
 treenode
 tricky
 true

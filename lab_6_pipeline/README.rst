@@ -155,7 +155,7 @@ to check if you can get it.
          <https://github.com/fipl-hse/2023-2-level-ctlr/blob/main/
          lab_6_pipeline/tests/test_files/1_raw.txt>`__ and `Desired output
          <https://github.com/fipl-hse/2023-2-level-ctlr/blob/main/lab_6_pipeline/
-         tests/test_files/reference_score_four_test.txt>`__.
+         tests/test_files/reference_score_four.txt>`__.
 
 2. Desired mark **6**:
 
@@ -383,7 +383,7 @@ examples for a better understanding: `Raw text
 <https://github.com/fipl-hse/2023-2-level-ctlr/blob/main/
 lab_6_pipeline/tests/test_files/1_raw.txt>`__ - `Desired output
 <https://github.com/fipl-hse/2023-2-level-ctlr/blob/main/
-lab_6_pipeline/tests/test_files/reference_score_four_test.txt>`__.
+lab_6_pipeline/tests/test_files/reference_score_four.txt>`__.
 
 Stage 2.1. Implement simplified logic of ``TextProcessingPipeline``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -614,7 +614,7 @@ wrapper should be instantiated with the following instruction:
 
 .. code:: python
 
-   udpipe_analyzer = StanzaAnalyzer()
+   stanza_analyzer = StanzaAnalyzer()
 
 Wrapper does not accept any arguments during initialization, but calls protected method
 :py:meth:`lab_6_pipeline.pipeline.StanzaAnalyzer._bootstrap`, which is responsible for
@@ -806,7 +806,7 @@ Once executed,
 1. Iterates through the available articles taken from
    :py:class:`lab_6_pipeline.pipeline.CorpusManager`.
 2. Retrieves UD information for each article via ``StanzaAnalyzer`` interface
-   (notice any ``.conllu`` file type can be used, as each has POS info).
+   (notice only ``N_stanza_conllu.conllu`` files can be used).
 3. Calculates frequencies of each part of speech via protected method
    :py:meth:`lab_6_pipeline.pipeline.POSFrequencyPipeline._count_frequencies`, which
    accepts article instance and returns the dictionary
