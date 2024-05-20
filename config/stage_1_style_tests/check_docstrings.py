@@ -1,7 +1,7 @@
 """
 Check docstrings for conformance to the Google-style-docstrings.
 """
-
+# pylint: disable=duplicate-code
 import subprocess
 import sys
 from pathlib import Path
@@ -9,6 +9,7 @@ from pathlib import Path
 from config.cli_unifier import _run_console_tool, choose_python_exe
 from config.constants import PROJECT_CONFIG_PATH, PROJECT_ROOT
 from config.project_config import ProjectConfig
+from core_utils.constants import CONFIG_DIR, UTILS_DIR
 
 
 def get_files() -> list:
@@ -20,9 +21,9 @@ def get_files() -> list:
     """
     return [
         file
-        for directory in ['config', 'core_utils']
-        for file in Path(PROJECT_ROOT / directory).glob('**/*.py')
-        if file.name != '__init__.py' and 'ud_validator' not in str(file)
+        for directory in [CONFIG_DIR, UTILS_DIR]
+        for file in directory.glob('**/*.py')
+        if file.name != '__init__.py'
     ]
 
 
