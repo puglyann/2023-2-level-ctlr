@@ -21,31 +21,45 @@ from core_utils.constants import ASSETS_PATH, CRAWLER_CONFIG_PATH
 
 
 class IncorrectVerifyError(Exception):
-    pass
+    """
+    Verify certificate value is not True or False
+    """
 
 
 class IncorrectSeedURLError(Exception):
-    pass
+    """
+    Seed URL does not match standard pattern
+    """
 
 
 class IncorrectNumberOfArticlesError(Exception):
-    pass
+    """
+    Total number of articles to parse is not positive integer
+    """
 
 
 class IncorrectHeadersError(Exception):
-    pass
+    """
+    Headers are not in a form of dictionary
+    """
 
 
 class IncorrectEncodingError(Exception):
-    pass
+    """
+    Encoding is not a string
+    """
 
 
 class IncorrectTimeoutError(Exception):
-    pass
+    """
+    Timeout value is not a positive integer less than 60
+    """
 
 
 class NumberOfArticlesOutOfRangeError(Exception):
-    pass
+    """
+    Total number of articles is out of range from 1 to 150
+    """
 
 
 class Config:
@@ -79,7 +93,7 @@ class Config:
         Returns:
             ConfigDTO: Config values
         """
-        with open(self.path_to_config, 'r') as f:
+        with open(self.path_to_config, 'r', encoding='utf-8') as f:
             conf = json.load(f)
 
         return ConfigDTO(
@@ -116,7 +130,7 @@ class Config:
         if not isinstance(conf['encoding'], str):
             raise IncorrectEncodingError
 
-        if not isinstance(conf['timeout'], int) or not (0 <= conf['timeout'] < 60):
+        if not isinstance(conf['timeout'], int) or not 0 <= conf['timeout'] < 60:
             raise IncorrectTimeoutError
 
         if not isinstance(conf['should_verify_certificate'], bool):
