@@ -172,6 +172,7 @@ class UDPipeAnalyzer(LibraryWrapper):
             last=True,
             config={"conversion_maps": {"XPOS": {"": "_"}}, "include_headers": True},
         )
+
         return model
 
     def analyze(self, texts: list[str]) -> list[StanzaDocument | str]:
