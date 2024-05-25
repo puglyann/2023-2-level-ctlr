@@ -20,12 +20,16 @@ from core_utils.pipeline import (AbstractCoNLLUAnalyzer, CoNLLUDocument, Library
                                  PipelineProtocol, StanzaDocument, TreeNode)
 
 
-class EmptyDirectoryError:
-    pass
+class EmptyDirectoryError(Exception):
+    """
+    Directory is empty.
+    """
 
 
-class InconsistentDatasetError:
-    pass
+class InconsistentDatasetError(Exception):
+    """
+    IDs contain slips, number of meta and raw files is not equal, files are empty.
+    """
 
 
 class CorpusManager:
