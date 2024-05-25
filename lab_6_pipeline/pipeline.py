@@ -73,7 +73,7 @@ class CorpusManager:
                 raise InconsistentDatasetError
         if len(raw_files) != len(meta_files):
             raise InconsistentDatasetError
-        if any(file.stat().st_size for file in (raw_files + meta_files)):
+        if any(file.stat().st_size == 0 for file in (raw_files + meta_files)):
             raise InconsistentDatasetError
 
     def _scan_dataset(self) -> None:
