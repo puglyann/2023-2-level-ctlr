@@ -32,6 +32,12 @@ class EmptyDirectoryError(Exception):
     """
 
 
+class EmptyFileError(Exception):
+    """
+    File is empty.
+    """
+
+
 class InconsistentDatasetError(Exception):
     """
     IDs contain slips, number of meta and raw files is not equal, files are empty.
@@ -172,7 +178,6 @@ class UDPipeAnalyzer(LibraryWrapper):
             last=True,
             config={"conversion_maps": {"XPOS": {"": "_"}}, "include_headers": True},
         )
-
         return model
 
     def analyze(self, texts: list[str]) -> list[StanzaDocument | str]:
@@ -266,10 +271,6 @@ class StanzaAnalyzer(LibraryWrapper):
             CoNLLUDocument: Document ready for parsing
         """
         return CoNLL.conll2doc(input_file=article.get_file_path(kind=ArtifactType.STANZA_CONLLU))
-
-
-class EmptyFileError(Exception):
-    pass
 
 
 class POSFrequencyPipeline:
