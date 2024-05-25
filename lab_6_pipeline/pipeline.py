@@ -133,7 +133,7 @@ class TextProcessingPipeline(PipelineProtocol):
 
         conllu_articles = []
         if self.analyzer:
-            conllu_articles = self.analyzer.analyze(list(articles.values()))
+            conllu_articles = self.analyzer.analyze([article.text for article in articles.values()])
 
         for i, article in enumerate(articles.values()):
             to_cleaned(article)
