@@ -41,10 +41,8 @@ def pipeline_setup() -> None:
     TEST_PATH.mkdir(exist_ok=True)
     if ASSETS_PATH.exists():
         copy_student_data()
-        print('FIRST', list(TEST_PATH.glob('*')))
     else:
         article.ASSETS_PATH = TEST_PATH
         corpus_manager = CorpusManager(path_to_raw_txt_data=TEST_PATH)
         pipe = TextProcessingPipeline(corpus_manager, StanzaAnalyzer())
         pipe.run()
-        print('SECOND', list(TEST_PATH.glob('*')))
