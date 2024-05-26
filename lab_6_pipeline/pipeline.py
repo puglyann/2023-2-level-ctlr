@@ -10,20 +10,19 @@ from stanza.models.common.doc import Document
 from stanza.pipeline.core import Pipeline
 from stanza.utils.conll import CoNLL
 
-from core_utils import constants
-from core_utils.article import io
-from core_utils.article.article import Article, ArtifactType, get_article_id_from_filepath
-from core_utils.article.io import from_meta, from_raw, to_cleaned, to_meta
-from core_utils.constants import ASSETS_PATH
-from core_utils.pipeline import (AbstractCoNLLUAnalyzer, CoNLLUDocument, LibraryWrapper,
-                                 PipelineProtocol, StanzaDocument, TreeNode)
-from core_utils.visualizer import visualize
-
 try:
     from networkx import DiGraph
 except ImportError:  # pragma: no cover
     DiGraph = None  # type: ignore
     print('No libraries installed. Failed to import.')
+
+from core_utils.article.article import Article, ArtifactType, get_article_id_from_filepath
+from core_utils.pipeline import (AbstractCoNLLUAnalyzer, CoNLLUDocument, LibraryWrapper,
+                                 PipelineProtocol, StanzaDocument, TreeNode)
+from core_utils.article import io
+from core_utils.article.io import from_raw, to_cleaned
+from core_utils.constants import ASSETS_PATH, UDPIPE_MODEL_PATH
+from core_utils.visualizer import visualize
 
 
 class EmptyDirectoryError(Exception):
