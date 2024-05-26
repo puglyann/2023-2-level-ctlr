@@ -75,6 +75,7 @@ class CorpusManager:
             raise EmptyDirectoryError
 
         all_meta = list(self.path_to_raw_txt_data.glob(pattern='*_meta.json'))
+        print(f'This is all meta: {all_meta}')
         all_raw = list(self.path_to_raw_txt_data.glob(pattern='*_raw.txt'))
 
         if len(all_meta) != len(all_raw):
