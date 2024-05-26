@@ -75,7 +75,7 @@ class CorpusManager:
             raise EmptyDirectoryError
 
         print(f'This is path: {self.path_to_raw_txt_data}')
-        all_meta = list(self.path_to_raw_txt_data.glob(pattern='_meta.json'))
+        all_meta = list(self.path_to_raw_txt_data.glob(pattern='*_meta.json'))
         print(f'This is all meta: {all_meta}')
         all_raw = list(self.path_to_raw_txt_data.glob(pattern='*_raw.txt'))
 
@@ -395,6 +395,10 @@ def main() -> None:
     """
     corpus_manager = CorpusManager(path_to_raw_txt_data=ASSETS_PATH)
     pipeline = TextProcessingPipeline(corpus_manager)
+    pipeline.run()
+
+    udpipe_analyzer = UDPipeAnalyzer()
+    pipeline = TextProcessingPipeline(corpus_manager, udpipe_analyzer)
     pipeline.run()
 
 
