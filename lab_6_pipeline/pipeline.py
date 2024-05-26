@@ -3,7 +3,6 @@ Pipeline for CONLL-U formatting.
 """
 # pylint: disable=too-few-public-methods, unused-import, undefined-variable, too-many-nested-blocks
 import pathlib
-from os import listdir
 
 import spacy_udpipe
 import stanza
@@ -13,7 +12,7 @@ from stanza.utils.conll import CoNLL
 
 from core_utils.article import io
 from core_utils.article.io import from_raw, to_cleaned
-from core_utils.constants import UDPIPE_MODEL_PATH, ASSETS_PATH
+from core_utils.constants import ASSETS_PATH, UDPIPE_MODEL_PATH
 from core_utils.visualizer import visualize
 
 try:
@@ -22,7 +21,7 @@ except ImportError:  # pragma: no cover
     DiGraph = None  # type: ignore
     print('No libraries installed. Failed to import.')
 
-from core_utils.article.article import Article, get_article_id_from_filepath, ArtifactType
+from core_utils.article.article import Article, ArtifactType, get_article_id_from_filepath
 from core_utils.pipeline import (AbstractCoNLLUAnalyzer, CoNLLUDocument, LibraryWrapper,
                                  PipelineProtocol, StanzaDocument, TreeNode)
 
