@@ -3,6 +3,7 @@ Pipeline for CONLL-U formatting.
 """
 # pylint: disable=too-few-public-methods, unused-import, undefined-variable, too-many-nested-blocks
 import pathlib
+from os import listdir
 
 import spacy_udpipe
 import stanza
@@ -75,6 +76,7 @@ class CorpusManager:
             raise EmptyDirectoryError
 
         print(f'This is path: {self.path_to_raw_txt_data}')
+        print(f'This is all files: {listdir(self.path_to_raw_txt_data)}')
         all_meta = list(self.path_to_raw_txt_data.glob(pattern='*_meta.json'))
         print(f'This is all meta: {all_meta}')
         all_raw = list(self.path_to_raw_txt_data.glob(pattern='*_raw.txt'))
