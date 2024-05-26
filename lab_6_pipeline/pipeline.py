@@ -78,6 +78,8 @@ class CorpusManager:
         all_raw = list(self.path_to_raw_txt_data.glob(pattern='*_raw.txt'))
 
         if len(all_meta) != len(all_raw):
+            print(f'This is all meta length: {len(all_meta)}')
+            print(f'This is all raw length: {len(all_raw)}')
             raise InconsistentDatasetError
 
         all_meta.sort(key=lambda x: get_article_id_from_filepath(x))
