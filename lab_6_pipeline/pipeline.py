@@ -12,7 +12,7 @@ from stanza.utils.conll import CoNLL
 
 from core_utils.article import io
 from core_utils.article.io import from_raw, to_cleaned
-from core_utils.constants import UDPIPE_MODEL_PATH
+from core_utils.constants import UDPIPE_MODEL_PATH, ASSETS_PATH
 from core_utils.visualizer import visualize
 
 try:
@@ -389,6 +389,9 @@ def main() -> None:
     """
     Entrypoint for pipeline module.
     """
+    corpus_manager = CorpusManager(path_to_raw_txt_data=ASSETS_PATH)
+    pipeline = TextProcessingPipeline(corpus_manager)
+    pipeline.run()
 
 
 if __name__ == "__main__":
