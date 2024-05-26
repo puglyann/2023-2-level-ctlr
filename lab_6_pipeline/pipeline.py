@@ -75,15 +75,10 @@ class CorpusManager:
         if not any(self.path_to_raw_txt_data.iterdir()):
             raise EmptyDirectoryError
 
-        print(f'This is path: {self.path_to_raw_txt_data}')
-        print(f'This is all files: {listdir(self.path_to_raw_txt_data)}')
         all_meta = list(self.path_to_raw_txt_data.glob(pattern='*_meta.json'))
-        print(f'This is all meta: {all_meta}')
         all_raw = list(self.path_to_raw_txt_data.glob(pattern='*_raw.txt'))
 
         if len(all_meta) != len(all_raw):
-            print(f'This is all meta length: {len(all_meta)}')
-            print(f'This is all raw length: {len(all_raw)}')
             raise InconsistentDatasetError
 
         all_meta.sort(key=lambda x: get_article_id_from_filepath(x))
