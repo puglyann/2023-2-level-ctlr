@@ -80,10 +80,10 @@ class CorpusManager:
         if len(all_meta) != len(all_raw):
             raise InconsistentDatasetError
 
-        all_meta.sort(key=lambda x: get_article_id_from_filepath(x))
-        all_raw.sort(key=lambda x: get_article_id_from_filepath(x))
+        sorted_all_meta = sorted(all_meta, key=get_article_id_from_filepath)
+        sorted_all_raw = sorted(all_raw, key=get_article_id_from_filepath)
 
-        for i, (meta, raw) in enumerate(zip(all_meta, all_raw), start=1):
+        for i, (meta, raw) in enumerate(zip(sorted_all_meta, sorted_all_raw), start=1):
             if meta.stat().st_size == 0 or raw.stat().st_size == 0:
                 raise InconsistentDatasetError
 
@@ -99,7 +99,9 @@ class CorpusManager:
         """
         self._storage = {
             get_article_id_from_filepath(file):
-            from_raw(path=file, article=Article(url=None, article_id=get_article_id_from_filepath(file)))
+            from_raw(path=file, article=Article(
+                url=None, article_id=get_article_id_from_filepath(file))
+                     )
             for file in self.path_to_raw_txt_data.glob('*_raw.txt')
         }
 
@@ -390,12 +392,18 @@ def main() -> None:
     Entrypoint for pipeline module.
     """
     corpus_manager = CorpusManager(path_to_raw_txt_data=ASSETS_PATH)
-    pipeline = TextProcessingPipeline(corpus_manager)
-    pipeline.run()
-
     udpipe_analyzer = UDPipeAnalyzer()
     pipeline = TextProcessingPipeline(corpus_manager, udpipe_analyzer)
     pipeline.run()
+
+    stanza_analyzer = StanzaAnalyzer()
+    pipeline = TextProcessingPipeline(corpus_manager, stanza_analyzer)
+    pipeline.run()
+
+    visualizer = POSFrequencyPipeline(corpus_manager, stanza_analyzer)
+    visualizer.run()
+
+    print("Finished!")
 
 
 if __name__ == "__main__":
