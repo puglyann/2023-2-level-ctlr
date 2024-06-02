@@ -58,7 +58,8 @@ add-ignore = [
 max-line-length = 100
 exclude = [
     'venv*',
-    'build/'
+    'build/',
+    'admin_utils/final_project/ud_validator',
 ]
 application_import_names = ['config']
 select = ['I']
@@ -95,6 +96,7 @@ exclude = [
     'tests/',
     'tools/',
     'admin_utils/stubs',
+    'admin_utils/final_project/ud_validator',
 ]
 
 disallow_untyped_defs = true

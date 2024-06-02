@@ -133,8 +133,10 @@ authors
 autoformat
 automatically
 available
+axmatova
 backup
 balanced
+balmont
 bar
 base
 based
@@ -157,6 +159,7 @@ beyond
 bigger
 block
 blocks
+blok
 blyudova
 bonuses
 bool
@@ -314,6 +317,7 @@ ctlr-faq-label
 ctlr-lectures-label
 ctlr-tests-label
 current
+cvetaeva
 data
 dataclass
 dataset
@@ -322,6 +326,7 @@ date
 dates
 datetime
 datv
+day
 deadline
 debug
 dedicated
@@ -471,6 +476,7 @@ extending
 extends
 extension
 external
+extra
 extract
 extracted
 extracting
@@ -677,6 +683,7 @@ instructors
 int
 integer
 integration
+intelligibility
 intended
 intention
 interaction
@@ -786,6 +793,7 @@ makes
 making
 managing
 mandatory
+mandelstamm
 manipulations
 manner
 many
@@ -838,6 +846,7 @@ modules
 moment
 more
 moreover
+moritz
 morphological
 morphologicalanalysispipeline
 morphologically
@@ -851,6 +860,7 @@ mozilla
 much
 multiple
 must
+mypy
 name
 named
 names
@@ -972,6 +982,7 @@ patternsearcher
 patternsearchertests
 patternsearchpipeline
 patternsearchpipelinetests
+penalties
 per
 perform
 performance
@@ -1248,6 +1259,7 @@ show
 showed
 shown
 shutil
+silverage
 similar
 similarly
 simple
@@ -1461,6 +1473,7 @@ under
 underscore
 understand
 understanding
+undirected
 unified
 unify
 unite
@@ -1580,6 +1593,7 @@ writes
 written
 www
 xfplx
+xlsx
 xpos
 yes
 you
